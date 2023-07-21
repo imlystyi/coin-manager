@@ -165,6 +165,15 @@
     <None Include="..\.editorconfig">
       <Link>.editorconfig</Link>
     </None>
+    <Content Include="Assets\Fonts\Inter-Thin.ttf" />
+    <Content Include="Assets\Fonts\Inter-ExtraLight.ttf" />
+    <Content Include="Assets\Fonts\Inter-Light.ttf" />
+    <Content Include="Assets\Fonts\Inter-Regular.ttf" />
+    <Content Include="Assets\Fonts\Inter-Medium.ttf" />
+    <Content Include="Assets\Fonts\Inter-SemiBold.ttf" />
+    <Content Include="Assets\Fonts\Inter-Bold.ttf" />
+    <Content Include="Assets\Fonts\Inter-ExtraBold.ttf" />
+    <Content Include="Assets\Fonts\Inter-Black.ttf" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

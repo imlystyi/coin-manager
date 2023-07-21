@@ -29,7 +29,7 @@ namespace CoinManager.Models
             if (string.IsNullOrEmpty(mark))
                 LoadAll();
             else
-                Currencies = new ObservableCollection<BriefCurrency>(Currencies.Where(ii => ii.Id.Contains(mark) || ii.Symbol.Contains(mark)));
+                Currencies = new ObservableCollection<BriefCurrency>(Currencies.Where(ii => ii.Id.Contains(mark) || ii.Symbol.Contains(mark)).Take(10));
         }
 
         private void LoadAll()
@@ -37,7 +37,7 @@ namespace CoinManager.Models
             JArray jsonArray = Task.Run(ApiClient.GetCurrenciesJArray).Result;
             List<BriefCurrency> currencies = jsonArray.ToObject<List<BriefCurrency>>();
 
-            Currencies = new ObservableCollection<BriefCurrency>(currencies);
+            Currencies = new ObservableCollection<BriefCurrency>(currencies.Take(10));
         }
 
         #endregion

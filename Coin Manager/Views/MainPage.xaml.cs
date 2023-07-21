@@ -24,16 +24,11 @@ namespace CoinManager
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        CurrenciesCollection CurrenciesCollection;
         public MainPage()
         {
-            this.InitializeComponent();
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            CurrenciesCollection cc = new CurrenciesCollection();
-            cc.FindByMark("bit");
-            ((Button)sender).Content = cc.Currencies[0].Id;
+            CurrenciesCollection = new CurrenciesCollection();
+            InitializeComponent(); 
         }
     }
 }

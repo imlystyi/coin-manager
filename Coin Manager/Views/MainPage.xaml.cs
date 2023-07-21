@@ -1,8 +1,10 @@
-﻿using System;
+﻿using CoinManager.Models;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -25,6 +27,13 @@ namespace CoinManager
         public MainPage()
         {
             this.InitializeComponent();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            CurrenciesCollection cc = new CurrenciesCollection();
+            cc.FindByMark("bit");
+            ((Button)sender).Content = cc.Currencies[0].Id;
         }
     }
 }

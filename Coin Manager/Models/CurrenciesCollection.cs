@@ -1,27 +1,48 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 
 // TODO: Documentation to CurrenciesCollection
 namespace CoinManager.Models
 {
-    public class CurrenciesCollection
+    public class CurrenciesCollection : INotifyPropertyChanged
     {
         #region Property
 
-        public ObservableCollection<BriefCurrency> Container { get; set; }
+        private long _timestamp;
 
-        public string FormattedLastRefreshDate { get; set; }
+        private ObservableCollection<BriefCurrency> _container;
+
+        public ObservableCollection<BriefCurrency> Container
+        {
+            get => _container;
+            set
+            {
+                _container = value;
+                OnPropertyChanged(nameof(Container));
+            }
+        }
+
+        protected void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        public string FormattedLastRefreshDate { get => TimestampToDateTime(_timestamp).ToString("dd MMMM yyyy, HH:mm:ss"); }
 
         #endregion
 
         #region Constructors
 
-        public CurrenciesCollection() => LoadAll();
+        public CurrenciesCollection() => Container = GetCurrenciesAsObservableCollection();
+
+        public event PropertyChangedEventHandler PropertyChanged;
 
         #endregion
 
@@ -29,25 +50,32 @@ namespace CoinManager.Models
 
         public void FindByMark(string mark)
         {
+            mark = mark.ToLower();
+
             if (string.IsNullOrEmpty(mark))
                 Update();
             else
-                Container = new ObservableCollection<BriefCurrency>(Container.Where(ii => ii.Id.Contains(mark) || ii.Symbol.Contains(mark)).Take(10));
+                Container = new ObservableCollection<BriefCurrency>(GetCurrenciesAsIEnumerable().Where(cc => cc.Id.ToLower().Contains(mark) || cc.Symbol.ToLower().Contains(mark)).Take(10));
         }
 
-        public void Update()
-        {
-            LoadAll();
-        }
+        public void Update() => Container = GetCurrenciesAsObservableCollection();
 
-        private void LoadAll()
+        private ObservableCollection<BriefCurrency> GetCurrenciesAsObservableCollection() => new ObservableCollection<BriefCurrency>(GetCurrenciesAsIEnumerable().Take(10));
+
+        private IEnumerable<BriefCurrency> GetCurrenciesAsIEnumerable()
         {
             JObject jsonObject = Task.Run(ApiClient.GetCurrencies).Result;
 
             JArray jsonArray = (JArray)jsonObject["data"];
-            List<BriefCurrency> currencies = jsonArray.ToObject<List<BriefCurrency>>();
+            _timestamp = (long)jsonObject["timestamp"];
 
-            Container = new ObservableCollection<BriefCurrency>(currencies.Take(10));
+            return jsonArray.ToObject<IEnumerable<BriefCurrency>>();
+        }
+
+        private DateTime TimestampToDateTime(long timestamp)
+        {
+            DateTime unixEpoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+            return unixEpoch.AddMilliseconds(timestamp);
         }
 
         #endregion

@@ -26,22 +26,33 @@
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Button x:Name="SettingsBtn" Width="48" Height="48" Background="Transparent" Margin="0,0,0,5" Padding="0" BorderThickness="0" Grid.Column="0">
+            <Button x:Name="SettingsButton" Style="{StaticResource ImageButton}" Margin="0,0,0,5" Grid.Column="0">
                 <Image Source="/Assets/Icons/settings_icon.png"/>
             </Button>
-            <Button x:Name="RefreshBtn" Width="48" Height="48" Background="Transparent" Margin="0,0,0,5" Padding="0" BorderThickness="0" Grid.Column="1" Click="RefreshBtn_Click">
+            <Button x:Name="RefreshButton" Style="{StaticResource ImageButton}" Margin="0,0,0,5" Grid.Column="1" Click="RefreshButton_Click">
                 <Image Source="/Assets/Icons/refresh_icon.png"/>
             </Button>
-            <Button x:Name="FastConversionBtn" Style="{StaticResource TextBtn}" Content="Fast conversion" Grid.Column="2"/>
-            <Button x:Name="HelpBtn" Style="{StaticResource TextBtn}" Content="Help" Grid.Column="3"/>
-            <Button x:Name="AboutBtn" Style="{StaticResource TextBtn}" Content="About"  Grid.Column="4"/>
-            <TextBlock x:Name="LastRefreshTime" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="5"/>
+            <Button x:Name="FastConversionButton" Style="{StaticResource ClickableText}" Content="Fast conversion" Grid.Column="2" Click="FastConversionButton_Click"/>
+            <Button x:Name="HelpButton" Style="{StaticResource ClickableText}" Content="Help" Grid.Column="3"/>
+            <Button x:Name="AboutButton" Style="{StaticResource ClickableText}" Content="About" Grid.Column="4"/>
+            <TextBlock x:Name="LastRefreshTime" VerticalAlignment="Center" HorizontalAlignment="Right" Grid.Column="5"/>
+            <Image Source="/Assets/Icons/coin_manager_logo.png" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="6"/>
         </Grid>
-        <TextBox HorizontalAlignment="Left" TextWrapping="Wrap" Text="" VerticalAlignment="Center" Width="1200" PlaceholderText="Search currency..." Padding="50,3,6,6" CornerRadius="10,10,10,10" FontSize="20" Background="{StaticResource EntryUnfocusedBackground}" FocusVisualPrimaryBrush="{StaticResource EntryFocusedBackground}" Foreground="{StaticResource EntryUnfocusedForeground}" PlaceholderForeground="{StaticResource EntryUnfocusedForeground}" FocusVisualSecondaryBrush="{x:Null}" SelectionHighlightColor="Transparent" Grid.Row="1"/>
-        <Image Source="/Assets/Icons/search_icon.png" Width="32" Height="32" Grid.Row="1" HorizontalAlignment="Left" Margin="8,4,0,4"/>
-        <Grid x:Name="ListHeader" Grid.Row="2" Margin="0,20" Background="#FF1B0056" CornerRadius="0">
+        <Grid Grid.Row="1" ColumnSpacing="25">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="SearchButton" Style="{StaticResource ImageButton}" Grid.Column="1" Click="SearchButton_Click">
+                <Image Source="/Assets/Icons/enter_icon.png"/>
+            </Button>
+            <TextBox x:Name="SearchBox" TextWrapping="Wrap" BorderThickness="0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="1350" PlaceholderText="Search currency..." Padding="50,0,0,5" CornerRadius="10,10,10,10" FontSize="24" Background="{StaticResource EntryUnfocusedBackground}"/>
+        </Grid>        
+        <Image Source="/Assets/Icons/search_icon.png" Width="24" Height="24" Grid.Row="1" HorizontalAlignment="Left" Margin="8,4,0,4"/>
+        <Grid x:Name="ListHeader" Margin="0,20" Background="#FF1B0056" CornerRadius="0" Height="45" Padding="0,8,0,0" Grid.Row="2" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
@@ -51,18 +62,23 @@
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
-            <TextBlock Style="{StaticResource CListText}" Text="Rank"  Width="100" MaxWidth="100" Grid.Column="0"/>
-            <TextBlock Style="{StaticResource CListSeparator}" Grid.Column="1"/>
-            <TextBlock Style="{StaticResource CListText}" Text="Name" Width="300" MaxWidth="300" Grid.Column="2"/>
-            <TextBlock Style="{StaticResource CListSeparator}" Grid.Column="3"/>
-            <TextBlock Style="{StaticResource CListText}" Text="Price" Width="450" MaxWidth="450" Grid.Column="4"/>
-            <TextBlock Style="{StaticResource CListSeparator}" Grid.Column="5"/>
-            <TextBlock Style="{StaticResource CListText}" Text="Price change percent" Grid.Column="6"/>
+            <TextBlock Style="{StaticResource CurrenciesListText}" Text="Rank" FontFamily="Bold" Width="100" MaxWidth="100" Grid.Column="0"/>
+            <TextBlock Style="{StaticResource CurrenciesListSeparator}" Grid.Column="1"/>
+            <TextBlock Style="{StaticResource CurrenciesListText}" Text="Name" FontFamily="Bold" Width="300" MaxWidth="300" Grid.Column="2"/>
+            <TextBlock Style="{StaticResource CurrenciesListSeparator}" Grid.Column="3"/>
+            <TextBlock Style="{StaticResource CurrenciesListText}" Text="Price" FontFamily="Bold" Width="450" MaxWidth="450" Grid.Column="4"/>
+            <TextBlock Style="{StaticResource CurrenciesListSeparator}" Grid.Column="5"/>
+            <TextBlock Style="{StaticResource CurrenciesListText}" Text="Price change percent" FontFamily="Bold" Grid.Column="6"/>
         </Grid>
-        <ListView x:Name="CList" ItemsSource="{x:Bind Collection.Container}" Grid.Row="4" IsItemClickEnabled="True" ItemClick="CList_ItemClicked">
+        <ListView x:Name="CurrenciesList" ItemsSource="{x:Bind Collection.Container, Mode=OneWay}" Grid.Row="4" IsItemClickEnabled="True" ItemClick="CurrenciesList_ItemClicked">
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                </Style>
+            </ListView.ItemContainerStyle>
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Grid Margin="-12,6">
+                    <Grid Margin="-12,6" Background="#0D0D0D" Height="38" Padding="0,6,0,0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="Auto"/>
@@ -70,15 +86,15 @@
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <TextBlock Style="{StaticResource CListText}" Text="{Binding Rank}"  Width="100" MaxWidth="100" Grid.Column="0"/>
-                        <TextBlock Style="{StaticResource CListSeparator}" Grid.Column="1"/>
-                        <TextBlock Style="{StaticResource CListText}" Text="{Binding Symbol}" Width="300" MaxWidth="300" Grid.Column="2"/>
-                        <TextBlock Style="{StaticResource CListSeparator}" Grid.Column="3"/>
-                        <TextBlock Style="{StaticResource CListText}" Text="{Binding Price, Converter={StaticResource StringFormatConverter}, ConverterParameter='{}{0:N3}'}" Width="450" MaxWidth="450" Grid.Column="4"/>
-                        <TextBlock Style="{StaticResource CListSeparator}" Grid.Column="5"/>
-                        <TextBlock Style="{StaticResource CListText}" Text="{Binding PriceChangePercent, Converter={StaticResource StringFormatConverter}, ConverterParameter='{}{0:F4}'}" Grid.Column="6"/>
+                        <TextBlock Style="{StaticResource CurrenciesListText}" Text="{Binding Rank, Mode=OneWay}"  Width="100" MaxWidth="100" Grid.Column="0"/>
+                        <TextBlock Style="{StaticResource CurrenciesListSeparator}" Grid.Column="1"/>
+                        <TextBlock Style="{StaticResource CurrenciesListText}" Text="{Binding Symbol, Mode=OneWay}" Width="300" MaxWidth="300" Grid.Column="2"/>
+                        <TextBlock Style="{StaticResource CurrenciesListSeparator}" Grid.Column="3"/>
+                        <TextBlock Style="{StaticResource CurrenciesListText}" Text="{Binding Price, Mode=OneWay, Converter={StaticResource StringFormatConverter}, ConverterParameter='{}{0:N3}'}" Width="450" MaxWidth="450" Grid.Column="4"/>
+                        <TextBlock Style="{StaticResource CurrenciesListSeparator}" Grid.Column="5"/>
+                        <TextBlock Style="{StaticResource CurrenciesListText}" Text="{Binding PriceChangePercent, Mode=OneWay, Converter={StaticResource StringFormatConverter}, ConverterParameter='{}{0:F4}'}" Grid.Column="6"/>
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>

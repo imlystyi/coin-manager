@@ -123,6 +123,9 @@
     <Compile Include="Models\Currency.cs" />
     <Compile Include="Models\CurrenciesCollection.cs" />
     <Compile Include="Models\MarketsCollection.cs" />
+    <Compile Include="Views\ConversionPage.xaml.cs">
+      <DependentUpon>ConversionPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\CurrencyInfoPage.xaml.cs">
       <DependentUpon>CurrencyInfoPage.xaml</DependentUpon>
     </Compile>
@@ -138,6 +141,8 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\Icons\coin_manager_logo.png" />
+    <Content Include="Assets\Icons\enter_icon.png" />
     <Content Include="Assets\Icons\refresh_icon.png" />
     <Content Include="Assets\Icons\search_icon.png" />
     <Content Include="Assets\Icons\settings_icon.png" />
@@ -155,6 +160,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Views\ConversionPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\CurrencyInfoPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

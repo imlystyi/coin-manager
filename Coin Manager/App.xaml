@@ -10,22 +10,28 @@
         <SolidColorBrush x:Key="EntryFocusedForeground" Color="#6A6E85"/>
         <SolidColorBrush x:Key="DarkBackground" Color="#0F1020"/>
         <Color x:Key="PurpleBorderBrush">#FF7353BA</Color>
-        <Style x:Name="TextBtn" TargetType="Button">
+        <Style x:Name="ClickableText" TargetType="Button">
             <Setter Property="Background" Value="Transparent"/>
             <Setter Target="TextBox" Property="FontFamily" Value="Inter Medium"/>
             <Setter Target="TextBox" Property="Content" Value="Inter Medium"/>
             <Setter Target="TextBox" Property="FontSize" Value="24"/>
         </Style>
-        <Style x:Name="CListText" TargetType="TextBlock">
+        <Style x:Name="ImageButton" TargetType="Button">
+            <Setter Property="Width" Value="48"/>
+            <Setter Property="Height" Value="48"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="0"/>
+        </Style>
+        <Style x:Name="CurrenciesListText" TargetType="TextBlock">
             <Setter Property="TextWrapping" Value="Wrap"/>
-            <Setter Property="FontSize" Value="32"/>
+            <Setter Property="FontSize" Value="24"/>
             <Setter Property="Foreground" Value="White"/>
             <Setter Property="FontWeight" Value="Medium"/>
-            <Setter Property="FontFamily" Value="Inter Light"/>
-            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Disabled"/>
+            <Setter Property="FontFamily" Value="Inter ExtraLight"/>
             <Setter Property="Margin" Value="10,0,0,0"/>
         </Style>        
-        <Style x:Name="CInfoText" TargetType="TextBlock">
+        <Style x:Name="CurrencyInfoText" TargetType="TextBlock">
             <Setter Property="TextWrapping" Value="Wrap"/>
             <Setter Property="FontSize" Value="32"/>
             <Setter Property="Foreground" Value="White"/>
@@ -36,25 +42,23 @@
             <Setter Property="MaxWidth" Value="300"/>
             <Setter Property="Margin" Value="10,0,0,0"/>
         </Style>
-        <Style x:Name="CListSeparator" TargetType="TextBlock">
+        <Style x:Name="CurrenciesListSeparator" TargetType="TextBlock">
             <Setter Property="Text" Value="|"/>
             <Setter Property="TextWrapping" Value="Wrap"/>
-            <Setter Property="FontSize" Value="32"/>
+            <Setter Property="FontSize" Value="24"/>
             <Setter Property="Foreground" Value="White"/>
             <Setter Property="FontWeight" Value="Medium"/>
-            <Setter Property="FontFamily" Value="Inter Medium"/>
-            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Disabled"/>
+            <Setter Property="FontFamily" Value="Inter Thin"/>
         </Style>
-        <Style x:Name="CInfoSeparator" TargetType="TextBlock">
+        <Style x:Name="CurrencyInfoSeparator" TargetType="TextBlock">
             <Setter Property="Text" Value="|"/>
             <Setter Property="TextWrapping" Value="Wrap"/>
             <Setter Property="FontSize" Value="32"/>
             <Setter Property="Foreground" Value="White"/>
             <Setter Property="FontWeight" Value="Medium"/>
             <Setter Property="FontFamily" Value="Inter Light"/>
-            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Disabled"/>
         </Style>
-        <Style x:Name="CInfoValue" TargetType="TextBlock">
+        <Style x:Name="CurrencyInfoValue" TargetType="TextBlock">
             <Setter Property="Text" Value="|"/>
             <Setter Property="TextWrapping" Value="Wrap"/>
             <Setter Property="FontSize" Value="32"/>
@@ -62,7 +66,6 @@
             <Setter Property="FontWeight" Value="Medium"/>
             <Setter Property="FontFamily" Value="Inter Medium"/>
             <Setter Property="Margin" Value="10,0,0,0"/>
-            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Disabled"/>
         </Style>
     </Application.Resources>
 </Application>

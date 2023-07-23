@@ -29,14 +29,34 @@ namespace CoinManager
         {
             Collection = new CurrenciesCollection();
             InitializeComponent();
+            ReloadLastRefreshTime();
         }
 
-        private void CList_ItemClicked(object sender, ItemClickEventArgs e)
+        private void ReloadLastRefreshTime() => LastRefreshTime.Text = ($"Last refresh time (in UTC):\n{Collection.FormattedLastRefreshDate}");
+        private void CurrenciesList_ItemClicked(object sender, ItemClickEventArgs e)
         {
             if (e.ClickedItem is CurrenciesCollection.BriefCurrency item)
                 Frame.Navigate(typeof(CurrencyInfoPage), item.Id);
         }
 
-        private void RefreshBtn_Click(object sender, RoutedEventArgs e) => Collection.Update();
+        private void RefreshButton_Click(object sender, RoutedEventArgs e)
+        {
+            Collection.Update();
+            ReloadLastRefreshTime();
+        }
+
+        private void FastConversionButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void SearchButton_Click(object sender, RoutedEventArgs e)
+        {
+            string mark = SearchBox.Text;
+
+            Collection.FindByMark(mark);
+
+            ReloadLastRefreshTime();
+        }
     }
 }

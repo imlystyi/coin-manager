@@ -11,7 +11,7 @@ namespace CoinManager.Models
     {
         #region Properties
 
-        public ObservableCollection<Market> Markets { get; set; }
+        public ObservableCollection<Market> Container { get; set; }
 
         #endregion
 
@@ -25,10 +25,11 @@ namespace CoinManager.Models
 
         private void LoadAll(string id)
         {
-            JArray jsonArray = Task.Run(() => ApiClient.GetMarketsJArray(id)).Result;
+            JObject jsonObject = Task.Run(() => ApiClient.GetMarkets(id)).Result;
+            JArray jsonArray = (JArray)jsonObject["data"];
             List<Market> markets = jsonArray.ToObject<List<Market>>();
 
-            Markets = new ObservableCollection<Market>(markets);
+            Container = new ObservableCollection<Market>(markets);
         }
 
         #endregion
@@ -38,13 +39,13 @@ namespace CoinManager.Models
         public sealed class Market
         {
             [JsonProperty("exchangeId")]
-            public string Id;
+            public string Id { get; set; }
 
             [JsonProperty("quoteSymbol")]
-            public string QuoteSymbol;
+            public string QuoteSymbol { get; set; }
 
             [JsonProperty("priceUsd")]
-            public string Price;
+            public string Price { get; set; }
         }
 
         #endregion

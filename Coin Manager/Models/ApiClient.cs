@@ -18,27 +18,25 @@ namespace CoinManager.Models
 
         #region Methods
 
-        public static async Task<JArray> GetCurrenciesJArray()
+        public static async Task<JObject> GetCurrencies()
         {
             string url = $"{URL_BASE}/assets";
             HttpResponseMessage httpResponse = await _client.GetAsync(url);
             httpResponse.EnsureSuccessStatusCode();
 
             string jsonString = await httpResponse.Content.ReadAsStringAsync();
-            JObject jsonObject = JObject.Parse(jsonString);
+            return JObject.Parse(jsonString);
 
-            return (JArray)jsonObject["data"];
+            // return (JArray)jsonObject["data"];
         }
 
-        public static async Task<JArray> GetMarketsJArray(string id)
+        public static async Task<JObject> GetMarkets(string id)
         {
             string url = $"{URL_BASE}/assets/{id}/markets";
             HttpResponseMessage httpResponse = await _client.GetAsync(url);
 
             string jsonString = await httpResponse.Content.ReadAsStringAsync();
-            JObject jsonObject = JObject.Parse(jsonString);
-
-            return (JArray)jsonObject["data"];
+            return JObject.Parse(jsonString);
         }
 
         public static async Task<Currency> GetCurrencyInfo(string id)

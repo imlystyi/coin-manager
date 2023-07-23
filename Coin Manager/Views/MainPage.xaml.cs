@@ -1,4 +1,5 @@
 ﻿using CoinManager.Models;
+using CoinManager.Views;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -15,8 +16,6 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-// The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
-
 namespace CoinManager
 {
     /// <summary>
@@ -24,11 +23,20 @@ namespace CoinManager
     /// </summary>
     public sealed partial class MainPage : Page
     {
-        CurrenciesCollection CurrenciesCollection;
+        public CurrenciesCollection Collection { get; }
+
         public MainPage()
         {
-            CurrenciesCollection = new CurrenciesCollection();
-            InitializeComponent(); 
+            Collection = new CurrenciesCollection();
+            InitializeComponent();
         }
+
+        private void CList_ItemClicked(object sender, ItemClickEventArgs e)
+        {
+            if (e.ClickedItem is CurrenciesCollection.BriefCurrency item)
+                Frame.Navigate(typeof(CurrencyInfoPage), item.Id);
+        }
+
+        private void RefreshBtn_Click(object sender, RoutedEventArgs e) => Collection.Update();
     }
 }

@@ -3,41 +3,82 @@
 namespace CoinManager.Models
 {
     /// <summary>
-    /// Represents cryptocurrency as a DTO model.
+    /// Represents cryptocurrency as a data model.
     /// </summary>
     public class Currency
     {
+        #region Fields
+
+        [JsonProperty("priceUsd")]
+        private readonly decimal _price;
+
+        [JsonProperty("changePercent24Hr")]
+        private readonly decimal _priceChange;
+
+        [JsonProperty("volumeUsd24Hr")]
+        private readonly decimal _volume;
+
+        [JsonProperty("supply")]
+        private readonly decimal _supply;
+
+        [JsonProperty("maxSupply")]
+        private readonly decimal _maxSupply;
+
+        [JsonProperty("marketCapUsd")]
+        private readonly decimal _marketCap;
+
+        #endregion
+
         #region Properties
 
-        [JsonProperty("id")]
         /// <summary>
         /// Id of the cryptocurrency.
         /// </summary>
+        [JsonProperty("id")]
         public string Id { get; set; }
 
-        [JsonProperty("rank")]
+        /// <summary>
+        /// Symbol of the cryptocurrency.
+        /// </summary>
+        [JsonProperty("symbol")]
+        public string Symbol { get; set; }
+
         /// <summary>
         /// Number that is directly associated with the cryptocurrency marketcap whereas the highest marketcap receives 1.
         /// </summary>
+        [JsonProperty("rank")]
         public int Rank { get; set; }
 
-        [JsonProperty("priceUsd")]
         /// <summary>
         /// Price of the cryptocurrency in some other currency.
         /// </summary>
-        public decimal Price { get; set; }
+        public string Price { get => string.Format("{0:N3}$", _price); }
 
-        [JsonProperty("volumeUsd24Hr")]
-        /// <summary>
-        /// Volume of the cryptocurrency.
-        /// </summary>
-        public decimal Volume { get; set; }
-
-        [JsonProperty("changePercent24Hr")]
         /// <summary>
         /// The cryptocurrency price change within 24 hours.
         /// </summary>
-        public decimal PriceChange { get; set; }
+        public string PriceChange { get => string.Format("{0:F2}%", _priceChange); }
+
+        /// <summary>
+        /// Volume of the cryptocurrency.
+        /// </summary>
+        public string Volume { get => string.Format("{0:N3}$", _volume); }
+
+        /// <summary>
+        /// Available supply for trading.
+        /// </summary>
+        public string Supply { get => string.Format("{0:N3}$", _supply); }
+
+        /// <summary>
+        /// Total quantity of asset issued
+        /// </summary>
+        public string MaxSupply { get => string.Format("{0:N3}$", _maxSupply); }
+
+        /// <summary>
+        /// Total power of the cryptocurrency, that is calculated by multiplication the supply and the price.
+        /// </summary>
+
+        public string MarketCap { get => string.Format("{0:N3}$", _marketCap); }
 
         #endregion
 
@@ -48,23 +89,6 @@ namespace CoinManager.Models
         /// </summary>
         public Currency()
         {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Currency"/> class with the specified price, volume, and price change parameters.
-        /// </summary>
-        /// <param name="id"><inheritdoc cref="Id"/></param>
-        /// <param name="rank"><inheritdoc cref="Rank"/></param>
-        /// <param name="price"><inheritdoc cref="Price"/></param>
-        /// <param name="volume"><inheritdoc cref="Volume"/></param>
-        /// <param name="priceChange"><inheritdoc cref="PriceChange"/></param>
-        public Currency(string id, int rank, decimal price, decimal volume, decimal priceChange)
-        {
-            Id = id;
-            Rank = rank;
-            Price = price;
-            Volume = volume;
-            PriceChange = priceChange;
         }
 
         #endregion 

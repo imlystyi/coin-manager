@@ -4,9 +4,65 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:CoinManager">
     <Application.Resources>
-        <SolidColorBrush x:Key="EntryBackground" Color="#FFD9C8FF"/>
-        <SolidColorBrush x:Key="DarkBackground" Color="#FF0F1020"/>
+        <SolidColorBrush x:Key="EntryUnfocusedBackground" Color="#474B5B"/>
+        <SolidColorBrush x:Key="EntryFocusedBackground" Color="#9CA2B8"/>
+        <SolidColorBrush x:Key="EntryUnfocusedForeground" Color="#6A6E85"/>
+        <SolidColorBrush x:Key="EntryFocusedForeground" Color="#6A6E85"/>
+        <SolidColorBrush x:Key="DarkBackground" Color="#0F1020"/>
         <Color x:Key="PurpleBorderBrush">#FF7353BA</Color>
+        <Style x:Name="TextBtn" TargetType="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Target="TextBox" Property="FontFamily" Value="Inter Medium"/>
+            <Setter Target="TextBox" Property="Content" Value="Inter Medium"/>
+            <Setter Target="TextBox" Property="FontSize" Value="24"/>
+        </Style>
+        <Style x:Name="CListText" TargetType="TextBlock">
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="FontSize" Value="32"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontWeight" Value="Medium"/>
+            <Setter Property="FontFamily" Value="Inter Light"/>
+            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Disabled"/>
+            <Setter Property="Margin" Value="10,0,0,0"/>
+        </Style>        
+        <Style x:Name="CInfoText" TargetType="TextBlock">
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="FontSize" Value="32"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontWeight" Value="Medium"/>
+            <Setter Property="FontFamily" Value="Inter Light"/>
+            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Disabled"/>
+            <Setter Property="Width" Value="300"/>
+            <Setter Property="MaxWidth" Value="300"/>
+            <Setter Property="Margin" Value="10,0,0,0"/>
+        </Style>
+        <Style x:Name="CListSeparator" TargetType="TextBlock">
+            <Setter Property="Text" Value="|"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="FontSize" Value="32"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontWeight" Value="Medium"/>
+            <Setter Property="FontFamily" Value="Inter Medium"/>
+            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Disabled"/>
+        </Style>
+        <Style x:Name="CInfoSeparator" TargetType="TextBlock">
+            <Setter Property="Text" Value="|"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="FontSize" Value="32"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontWeight" Value="Medium"/>
+            <Setter Property="FontFamily" Value="Inter Light"/>
+            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Disabled"/>
+        </Style>
+        <Style x:Name="CInfoValue" TargetType="TextBlock">
+            <Setter Property="Text" Value="|"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="FontSize" Value="32"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontWeight" Value="Medium"/>
+            <Setter Property="FontFamily" Value="Inter Medium"/>
+            <Setter Property="Margin" Value="10,0,0,0"/>
+            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Disabled"/>
+        </Style>
     </Application.Resources>
-
 </Application>

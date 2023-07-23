@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -12,7 +13,9 @@ namespace CoinManager.Models
     {
         #region Property
 
-        public ObservableCollection<BriefCurrency> Currencies { get; set; }
+        public ObservableCollection<BriefCurrency> Container { get; set; }
+
+        public string FormattedLastRefreshDate { get; set; }
 
         #endregion
 
@@ -27,17 +30,24 @@ namespace CoinManager.Models
         public void FindByMark(string mark)
         {
             if (string.IsNullOrEmpty(mark))
-                LoadAll();
+                Update();
             else
-                Currencies = new ObservableCollection<BriefCurrency>(Currencies.Where(ii => ii.Id.Contains(mark) || ii.Symbol.Contains(mark)).Take(10));
+                Container = new ObservableCollection<BriefCurrency>(Container.Where(ii => ii.Id.Contains(mark) || ii.Symbol.Contains(mark)).Take(10));
+        }
+
+        public void Update()
+        {
+            LoadAll();
         }
 
         private void LoadAll()
         {
-            JArray jsonArray = Task.Run(ApiClient.GetCurrenciesJArray).Result;
+            JObject jsonObject = Task.Run(ApiClient.GetCurrencies).Result;
+
+            JArray jsonArray = (JArray)jsonObject["data"];
             List<BriefCurrency> currencies = jsonArray.ToObject<List<BriefCurrency>>();
 
-            Currencies = new ObservableCollection<BriefCurrency>(currencies.Take(10));
+            Container = new ObservableCollection<BriefCurrency>(currencies.Take(10));
         }
 
         #endregion

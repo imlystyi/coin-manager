@@ -1,5 +1,4 @@
 ﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
@@ -13,11 +12,17 @@ namespace CoinManager.Models
 {
     public class CurrenciesCollection : INotifyPropertyChanged
     {
-        #region Property
+        #region Fields
+
+        public event PropertyChangedEventHandler PropertyChanged;
 
         private long _timestamp;
 
         private ObservableCollection<BriefCurrency> _container;
+
+        #endregion
+
+        #region Properties
 
         public ObservableCollection<BriefCurrency> Container
         {
@@ -29,20 +34,13 @@ namespace CoinManager.Models
             }
         }
 
-        protected void OnPropertyChanged(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        public string FormattedLastRefreshDate { get => TimestampToDateTime(_timestamp).ToString("dd MMMM yyyy, HH:mm:ss"); }
+        public string FormattedLastRefreshDate => TimestampToDateTime(_timestamp).ToString("dd MMMM yyyy, HH:mm:ss");         
 
         #endregion
 
         #region Constructors
 
-        public CurrenciesCollection() => Container = GetCurrenciesAsObservableCollection();
-
-        public event PropertyChangedEventHandler PropertyChanged;
+        public CurrenciesCollection() => Container = GetCurrenciesAsObservableCollection();        
 
         #endregion
 
@@ -60,8 +58,11 @@ namespace CoinManager.Models
 
         public void Update() => Container = GetCurrenciesAsObservableCollection();
 
+        protected void OnPropertyChanged(string propertyName) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+
         private ObservableCollection<BriefCurrency> GetCurrenciesAsObservableCollection() => new ObservableCollection<BriefCurrency>(GetCurrenciesAsIEnumerable().Take(10));
 
+        // TODO: Edit "FormattedLastRefreshDate"
         private IEnumerable<BriefCurrency> GetCurrenciesAsIEnumerable()
         {
             JObject jsonObject = Task.Run(ApiClient.GetCurrencies).Result;

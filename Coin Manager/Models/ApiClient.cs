@@ -18,16 +18,27 @@ namespace CoinManager.Models
 
         #region Methods
 
+        public static async Task<string> GetExchangeUrl(string id)
+        {
+            string url = $"{URL_BASE}/exchanges/{id}";
+            HttpResponseMessage httpResponse = await _client.GetAsync(url);
+
+            if (!httpResponse.IsSuccessStatusCode)
+                return string.Empty;
+
+            string jsonString = await httpResponse.Content.ReadAsStringAsync();
+            JObject jsonObject = JObject.Parse(jsonString);
+
+            return jsonObject["data"]["exchangeUrl"].ToObject<string>();
+        }
+
         public static async Task<JObject> GetCurrencies()
         {
             string url = $"{URL_BASE}/assets";
             HttpResponseMessage httpResponse = await _client.GetAsync(url);
-            httpResponse.EnsureSuccessStatusCode();
 
             string jsonString = await httpResponse.Content.ReadAsStringAsync();
             return JObject.Parse(jsonString);
-
-            // return (JArray)jsonObject["data"];
         }
 
         public static async Task<JObject> GetMarkets(string id)

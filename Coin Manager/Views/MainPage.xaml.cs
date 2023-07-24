@@ -1,42 +1,51 @@
 ﻿using CoinManager.Models;
 using CoinManager.Views;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using System.Threading.Tasks;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
 
 namespace CoinManager
 {
     /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
+    /// Main page that shows the top 10 currencies by their rank and contains root controls.
     /// </summary>
     public sealed partial class MainPage : Page
     {
-        public CurrenciesCollection Collection { get; }
+        #region Fields
 
+        /// <summary>
+        /// Current instance of the <see cref="CurrenciesCollection"/> class that binded to the current <see cref="MainPage"/> instance.
+        /// </summary>
+        public CurrenciesCollection Collection;
+
+        #endregion
+
+        #region Contructors 
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MainPage"/> class.
+        /// </summary>
         public MainPage()
         {
             Collection = new CurrenciesCollection();
+
             InitializeComponent();
+
             ReloadLastRefreshTime();
         }
 
-        private void ReloadLastRefreshTime() => LastRefreshTime.Text = ($"Last refresh time (in UTC):\n{Collection.FormattedLastRefreshDate}");
+        #endregion
+
+        #region Event handlers
+
         private void CurrenciesList_ItemClicked(object sender, ItemClickEventArgs e)
         {
             if (e.ClickedItem is CurrenciesCollection.BriefCurrency item)
                 Frame.Navigate(typeof(CurrencyInfoPage), item.Id);
+        }
+
+        private void FastConversionButton_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(ConversionPage));
         }
 
         private void RefreshButton_Click(object sender, RoutedEventArgs e)
@@ -45,18 +54,20 @@ namespace CoinManager
             ReloadLastRefreshTime();
         }
 
-        private void FastConversionButton_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         private void SearchButton_Click(object sender, RoutedEventArgs e)
         {
             string mark = SearchBox.Text;
-
             Collection.FindByMark(mark);
 
             ReloadLastRefreshTime();
         }
+
+        #endregion
+
+        #region Methods
+
+        private void ReloadLastRefreshTime() => LastRefreshTime.Text = ($"Last refresh time (in UTC):\n{Collection.FormattedLastRefreshDate}");
+
+        #endregion        
     }
 }

@@ -12,14 +12,14 @@
         <converters:StringFormatConverter x:Key="StringFormatConverter"/>
     </Page.Resources>
     
-    <Grid x:Name="MainGrid" Margin="45,35,45,10">
+    <Grid Margin="45,35,45,10">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Grid x:Name="TopGrid" VerticalAlignment="Top" Height="100" ColumnSpacing="25" Grid.Row="0">
+        <Grid VerticalAlignment="Top" Height="100" ColumnSpacing="25" Grid.Row="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
@@ -35,7 +35,8 @@
             </Button>
             <Button x:Name="BackBtn" Style="{StaticResource ClickableText}" Content="Back to main page" Grid.Column="2"/>
             <Button x:Name="FastConversionBtn" Style="{StaticResource ClickableText}" Content="Fast conversion" Grid.Column="3"/>
-            <TextBlock x:Name="LastRefreshTime" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="4"/>
+            <TextBlock x:Name="LastRefreshTime" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,120,0" Grid.Column="4"/>
+            <Image Source="/Assets/Icons/coin_manager_logo.png" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="4"/>
         </Grid>
         <Grid x:Name="InfoGrid" Grid.Row="1" RowSpacing="7">
             <Grid.RowDefinitions>
@@ -77,7 +78,7 @@
             <TextBlock Style="{StaticResource CurrencyInfoValue}" Text="{x:Bind DisplayedCurrency.MaxSupply}" Grid.Row="2" Grid.Column="5"/>
             <TextBlock Style="{StaticResource CurrencyInfoValue}" Text="{x:Bind DisplayedCurrency.MarketCap}" Grid.Row="3" Grid.Column="5"/>
         </Grid>
-        <Grid x:Name="ListHeader" Grid.Row="2" Margin="0,20" Background="#FF1B0056">
+        <Grid x:Name="ListHeader" Background="#FF1B0056" CornerRadius="0" Height="45" Padding="0,8,0,0" Margin="0,20" Grid.Row="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
@@ -91,10 +92,15 @@
             <TextBlock Style="{StaticResource CurrenciesListSeparator}" Grid.Column="3"/>
             <TextBlock Style="{StaticResource CurrenciesListText}" Text="Price" Width="450" MaxWidth="450" Grid.Column="4"/>
         </Grid>
-        <ListView ItemsSource="{x:Bind Collection.Container}" Grid.Row="3" Margin="-18,0,0,0" ScrollViewer.HorizontalScrollBarVisibility="Visible">
+        <ListView x:Name="MarketsList" ItemsSource="{x:Bind Collection.Container}" IsItemClickEnabled="True" Grid.Row="3" Margin="-18,0,0,0" ScrollViewer.HorizontalScrollBarVisibility="Visible" ItemClick="MarketsList_ItemClick">
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                </Style>
+            </ListView.ItemContainerStyle>
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Grid Margin="5">
+                    <Grid Margin="5" Background="#0D0D0D" Height="38" Padding="0,6,0,0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="Auto"/>

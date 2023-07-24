@@ -141,6 +141,7 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\Icons\arrow_icon.png" />
     <Content Include="Assets\Icons\coin_manager_logo.png" />
     <Content Include="Assets\Icons\enter_icon.png" />
     <Content Include="Assets\Icons\refresh_icon.png" />

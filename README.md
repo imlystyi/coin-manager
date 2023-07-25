@@ -17,12 +17,10 @@
  **Coin Manager** is an application that allows you to watch, manage and transfer cryptocurrencies.
  
  ## Functionality
- 
-
  - Watching the top 10 (by rank) cryptocurrencies on the market
  - Searching for all avaliable (crypto)currencies on the market
  - Watching detailed information about cryptocurrency, including market cap, volume and supply
- - Watching in which market you can buy cryptocurrency and at what price
+ - Watching in which market you can buy cryptocurrency and at what price and ability to go to the market page
  - Converting one (crypto)currency to another
 
 ## Technologies, platforms and APIs

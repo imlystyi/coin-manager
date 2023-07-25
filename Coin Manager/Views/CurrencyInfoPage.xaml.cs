@@ -43,7 +43,7 @@ namespace CoinManager.Views
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             string id = e.Parameter.ToString();
-            DisplayedCurrency = Task.Run(() => ApiClient.GetCurrencyInfo(id)).Result;
+            DisplayedCurrency = Task.Run(() => ApiClient.GetCurrency(id)).Result;
 
             Collection = new MarketsCollection(id);
 

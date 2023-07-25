@@ -34,7 +34,7 @@ namespace CoinManager.Models
             }
         }
 
-        public string FormattedLastRefreshDate => TimestampToDateTime(_timestamp).ToString("dd MMMM yyyy, HH:mm:ss");         
+        public string FormattedLastRefreshDate => TimestampToDateTime(_timestamp).ToString("dd MMMM yyyy, HH:mm:ss");    
 
         #endregion
 
@@ -53,7 +53,9 @@ namespace CoinManager.Models
             if (string.IsNullOrEmpty(mark))
                 Update();
             else
-                Container = new ObservableCollection<BriefCurrency>(GetCurrenciesAsIEnumerable().Where(cc => cc.Id.ToLower().Contains(mark) || cc.Symbol.ToLower().Contains(mark)).Take(10));
+                Container = new ObservableCollection<BriefCurrency>(GetCurrenciesAsIEnumerable().Where(cc =>
+                cc.Id.ToLower().Contains(mark) ||
+                cc.Symbol.ToLower().Contains(mark)).Take(10));
         }
 
         public void Update() => Container = GetCurrenciesAsObservableCollection();

@@ -97,11 +97,11 @@ namespace CoinManager.Models
         }
 
         /// <summary>
-        /// Converts a basic cryptocurrency to a quote cryptocurrency.
+        /// Converts a basic currency to a quote currency.
         /// </summary>
-        /// <param name="baseId">Basic cryptocurrency identifier.</param>
-        /// <param name="quoteId">Quote cryptocurrency identifier.</param>
-        /// <returns>Amount of converted cryptocurrency as a <see cref="decimal"/>.</returns>
+        /// <param name="baseId">Basic currency identifier.</param>
+        /// <param name="quoteId">Quote currency identifier.</param>
+        /// <returns>Amount of converted currency as a <see cref="decimal"/>.</returns>
         public static async Task<decimal> DoCurrencyConversion(string baseId, string quoteId)
         {
             // Converting base currency in USD.

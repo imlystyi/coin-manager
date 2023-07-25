@@ -1,7 +1,9 @@
 ﻿using CoinManager.Models;
+using CoinManager.ViewModels;
 using System;
 using System.Threading.Tasks;
 using Windows.System;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 
@@ -33,7 +35,21 @@ namespace CoinManager.Views
         /// </summary>
         public CurrencyInfoPage()
         {
-            InitializeComponent();
+            try
+            {
+                InitializeComponent();
+            }
+            catch (Exception exception)
+            {
+                ContentDialog errorDialog = new ContentDialog()
+                {
+                    Title = "Error",
+                    Content = exception.Message,
+                    CloseButtonText = "Ok"
+                };
+
+                Task.Run(errorDialog.ShowAsync);
+            }
         }
 
         #endregion
@@ -42,44 +58,99 @@ namespace CoinManager.Views
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            string id = e.Parameter.ToString();
-            DisplayedCurrency = Task.Run(() => ApiClient.GetCurrency(id)).Result;
+            try
+            {
+                string id = e.Parameter.ToString();
+                DisplayedCurrency = Task.Run(() => ApiClient.GetCurrency(id)).Result;
 
-            Collection = new MarketsCollection(id);
+                Collection = new MarketsCollection(id);
 
-            ReloadLastRefreshTime();
+                ReloadLastRefreshTime();
+            }
+            catch (Exception exception)
+            {
+                ContentDialog errorDialog = new ContentDialog()
+                {
+                    Title = "Error",
+                    Content = exception.Message,
+                    CloseButtonText = "Ok"
+                };
+
+                Task.Run(errorDialog.ShowAsync);
+            }
 
             base.OnNavigatedTo(e);
         }
 
-        private void ReloadLastRefreshTime() => LastRefreshTime.Text = ($"Last refresh time (in UTC):\n{Collection.FormattedLastRefreshDate}");
+        private void ReloadLastRefreshTime() => LastRefreshTime.Text = ($"(UTC):\n{Collection.FormattedLastRefreshDate}");
 
         #endregion
 
+        #region Event handlers 
+
+        private void BackButton_Click(object sender, RoutedEventArgs e) => Frame.Navigate(typeof(MainPage));
+
+        private void FastConversionButton_Click(object sender, RoutedEventArgs e) => Frame.Navigate(typeof(ConversionPage));
+
         private async void MarketsList_ItemClick(object sender, ItemClickEventArgs e)
         {
-            if (e.ClickedItem is MarketsCollection.Market item)
+            try
             {
-                string url = Task.Run(() => ApiClient.GetExchangeUrl(item.Id)).Result;
-
-                if (string.IsNullOrEmpty(url))
-                    return;
-
-                Uri uri = new Uri(url);
-                bool success = await Launcher.LaunchUriAsync(uri);
-
-                if (!success)
+                if (e.ClickedItem is Market item)
                 {
-                    ContentDialog noWifiDialog = new ContentDialog()
-                    {
-                        Title = "Invalid launch",
-                        Content = "Coin Manager could not launch the browser.",
-                        CloseButtonText = "Ok"
-                    };
+                    string url = Task.Run(() => ApiClient.GetExchangeUrl(item.Id)).Result;
 
-                    await noWifiDialog.ShowAsync();
+                    if (string.IsNullOrEmpty(url))
+                        return;
+
+                    Uri uri = new Uri(url);
+                    bool success = await Launcher.LaunchUriAsync(uri);
+
+                    if (!success)
+                    {
+                        ContentDialog errorDialog = new ContentDialog()
+                        {
+                            Title = "Invalid launch",
+                            Content = "Coin Manager could not launch the browser.",
+                            CloseButtonText = "Ok"
+                        };
+
+                        await errorDialog.ShowAsync();
+                    }
                 }
             }
+            catch (Exception exception)
+            {
+                ContentDialog errorDialog = new ContentDialog()
+                {
+                    Title = "Error",
+                    Content = exception.Message,
+                    CloseButtonText = "Ok"
+                };
+
+                await errorDialog.ShowAsync();
+            }
         }
+        private void RefreshButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Collection.Update();
+                ReloadLastRefreshTime();
+            }
+            catch (Exception exception)
+            {
+                ContentDialog errorDialog = new ContentDialog()
+                {
+                    Title = "Error",
+                    Content = exception.Message,
+                    CloseButtonText = "Ok"
+                };
+
+                Task.Run(errorDialog.ShowAsync);
+            }
+        }
+
+        #endregion
     }
 }

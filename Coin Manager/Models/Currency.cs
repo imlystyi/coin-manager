@@ -5,7 +5,7 @@ namespace CoinManager.Models
     /// <summary>
     /// Represents cryptocurrency as a data model.
     /// </summary>
-    public class Currency
+    public class Currency : ICoin
     {
         #region Fields
 
@@ -32,7 +32,7 @@ namespace CoinManager.Models
         #region Properties
 
         /// <summary>
-        /// Id of the cryptocurrency.
+        /// Identifier of the cryptocurrency.
         /// </summary>
         [JsonProperty("id")]
         public string Id { get; set; }
@@ -50,7 +50,7 @@ namespace CoinManager.Models
         public int Rank { get; set; }
 
         /// <summary>
-        /// Price of the cryptocurrency in some other currency.
+        /// The price of the cryptocurrency.
         /// </summary>
         public string Price => (_price != null) ? string.Format("{0:N3}$", _price) : "n/a";
 
@@ -60,7 +60,7 @@ namespace CoinManager.Models
         public string PriceChange => (_priceChange != null) ? string.Format("{0:F2}%", _priceChange) : "n/a";
 
         /// <summary>
-        /// Volume of the cryptocurrency.
+        /// The volume of the cryptocurrency.
         /// </summary>
         public string Volume => (_volume != null) ? string.Format("{0:N3}$", _volume) : "n/a";
 
@@ -80,16 +80,5 @@ namespace CoinManager.Models
         public string MarketCap => (_marketCap != null) ? string.Format("{0:N3}$", _marketCap) : "n/a";
 
         #endregion
-
-        #region Constructors
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Currency"/> class.
-        /// </summary>
-        public Currency()
-        {
-        }
-
-        #endregion 
     }
 }

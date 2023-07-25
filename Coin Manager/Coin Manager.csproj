@@ -121,8 +121,14 @@
     </Compile>
     <Compile Include="Converters\StringFormatConverter.cs" />
     <Compile Include="Models\Currency.cs" />
-    <Compile Include="Models\CurrenciesCollection.cs" />
-    <Compile Include="Models\MarketsCollection.cs" />
+    <Compile Include="Models\BriefCurrency.cs" />
+    <Compile Include="Models\Rate.cs" />
+    <Compile Include="Models\ICoin.cs" />
+    <Compile Include="ViewModels\CoinCollection.cs" />
+    <Compile Include="ViewModels\CurrenciesCollection.cs" />
+    <Compile Include="Models\Market.cs" />
+    <Compile Include="ViewModels\RatesCollection.cs" />
+    <Compile Include="ViewModels\MarketsCollection.cs" />
     <Compile Include="Views\ConversionPage.xaml.cs">
       <DependentUpon>ConversionPage.xaml</DependentUpon>
     </Compile>
@@ -195,10 +201,10 @@
     <Content Include="Assets\Fonts\Inter-Bold.ttf" />
     <Content Include="Assets\Fonts\Inter-ExtraBold.ttf" />
     <Content Include="Assets\Fonts\Inter-Black.ttf" />
+    <PRIResource Include="Strings\uk-ua\Resources.resw" />
+    <PRIResource Include="Strings\en-us\Resources.resw" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Assets\svg\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

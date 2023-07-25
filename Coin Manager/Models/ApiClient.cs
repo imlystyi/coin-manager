@@ -1,11 +1,12 @@
-﻿using Newtonsoft.Json.Linq;
-using System.Collections.Generic;
+﻿using CoinManager.ViewModels;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace CoinManager.Models
 {
-    // TODO: Documentation to ApiClient
     /// <summary>
     /// Represents a client for working with the API.
     /// </summary>
@@ -15,8 +16,6 @@ namespace CoinManager.Models
     public static class ApiClient
     {
         #region Fields
-
-        private static readonly HttpClient _client = SingletonHttpClient.GetInstance();
 
         private const string URL_BASE = "https://api.coincap.io/v2";
 
@@ -32,10 +31,7 @@ namespace CoinManager.Models
         public static async Task<Currency> GetCurrency(string id)
         {
             string url = $"{URL_BASE}/assets/{id}";
-            HttpResponseMessage httpResponse = await _client.GetAsync(url);
-
-            string jsonString = await httpResponse.Content.ReadAsStringAsync();
-            JObject jsonObject = JObject.Parse(jsonString);
+            JObject jsonObject = await GetJObject(url);
 
             return jsonObject["data"].ToObject<Currency>();
         }
@@ -50,10 +46,7 @@ namespace CoinManager.Models
         public static async Task<JObject> GetCurrencies()
         {
             string url = $"{URL_BASE}/assets";
-            HttpResponseMessage httpResponse = await _client.GetAsync(url);
-
-            string jsonString = await httpResponse.Content.ReadAsStringAsync();
-            return JObject.Parse(jsonString);
+            return await GetJObject(url);
         }
 
         /// <summary>
@@ -67,10 +60,20 @@ namespace CoinManager.Models
         public static async Task<JObject> GetMarkets(string id)
         {
             string url = $"{URL_BASE}/assets/{id}/markets";
-            HttpResponseMessage httpResponse = await _client.GetAsync(url);
+            return await GetJObject(url);
+        }
 
-            string jsonString = await httpResponse.Content.ReadAsStringAsync();
-            return JObject.Parse(jsonString);
+        /// <summary>
+        /// Returns a list of all available rates.
+        /// </summary>
+        /// <remarks>
+        /// After getting, must be converted to some collection.
+        /// </remarks>
+        /// <returns>Rates list as a <see cref="JObject"/>.</returns>
+        public static async Task<JObject> GetRates()
+        {
+            string url = $"{URL_BASE}/rates";
+            return await GetJObject(url);
         }
 
         /// <summary>
@@ -80,8 +83,10 @@ namespace CoinManager.Models
         /// <returns>URL as a <see cref="string"/>.</returns>
         public static async Task<string> GetExchangeUrl(string id)
         {
+            HttpClient httpClient = SingletonHttpClient.GetInstance();
+
             string url = $"{URL_BASE}/exchanges/{id}";
-            HttpResponseMessage httpResponse = await _client.GetAsync(url);
+            HttpResponseMessage httpResponse = await httpClient.GetAsync(url);
 
             if (!httpResponse.IsSuccessStatusCode)
                 return string.Empty;
@@ -102,10 +107,7 @@ namespace CoinManager.Models
         {
             // Converting base currency in USD.
             string baseInUsdUrl = $"{URL_BASE}/rates/{baseId}";
-            HttpResponseMessage biuHttpResponse = await _client.GetAsync(baseInUsdUrl);
-
-            string baseInUsdJsonString = await biuHttpResponse.Content.ReadAsStringAsync();
-            JObject baseInUsdJsonObject = JObject.Parse(baseInUsdJsonString);
+            JObject baseInUsdJsonObject = await GetJObject(baseInUsdUrl);
 
             decimal baseInUsd = (decimal)baseInUsdJsonObject["data"]["rateUsd"];
 
@@ -113,17 +115,43 @@ namespace CoinManager.Models
             if (quoteId != "USD")
             {
                 string quoteInUsdUrl = $"{URL_BASE}/rates/{quoteId}";
-                HttpResponseMessage quoteInUsdHttpResponse = await _client.GetAsync(quoteInUsdUrl);
+                JObject quoteInUsdJsonObject = await GetJObject(quoteInUsdUrl);
 
-                string quoteInUsdJsonString = await quoteInUsdHttpResponse.Content.ReadAsStringAsync();
-                JObject qiuJsonObject = JObject.Parse(quoteInUsdJsonString);
-
-                decimal quoteInUsd = (decimal)qiuJsonObject["data"]["rateUsd"];
+                decimal quoteInUsd = (decimal)quoteInUsdJsonObject["data"]["rateUsd"];
 
                 return baseInUsd / quoteInUsd;
             }
             else
                 return baseInUsd;
+        }
+
+        private static async Task<JObject> GetJObject(string url)
+        {
+            HttpClient httpClient = SingletonHttpClient.GetInstance();
+
+            try
+            {
+                HttpResponseMessage httpResponse = await httpClient.GetAsync(url);
+                string jsonString = await httpResponse.Content.ReadAsStringAsync();
+
+                if (httpResponse.IsSuccessStatusCode || httpResponse.StatusCode == HttpStatusCode.NotFound)
+                {
+                    try
+                    {
+                        return JObject.Parse(jsonString);
+                    }
+                    catch (JsonReaderException)
+                    {
+                        throw new HttpRequestException("The API sent bad data.");
+                    }
+                }
+                else
+                    throw new HttpRequestException("There was a problem sending or processing the request. Try to check your internet connection or wait a minute.");
+            }
+            catch (HttpRequestException)
+            {
+                throw new HttpRequestException("There was a problem sending or processing the request. Try to check your internet connection or wait a minute.");
+            }
         }
 
         #endregion

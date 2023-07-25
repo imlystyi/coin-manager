@@ -1,5 +1,8 @@
 ﻿using CoinManager.Models;
+using CoinManager.ViewModels;
 using CoinManager.Views;
+using System;
+using System.Threading.Tasks;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -26,12 +29,32 @@ namespace CoinManager
         /// </summary>
         public MainPage()
         {
-            Collection = new CurrenciesCollection();
+            try
+            {
+                Collection = new CurrenciesCollection();
 
-            InitializeComponent();
+                InitializeComponent();
 
-            ReloadLastRefreshTime();
+                ReloadLastRefreshTime();
+            }
+            catch (Exception exception)
+            {
+                ContentDialog errorDialog = new ContentDialog()
+                {
+                    Title = "Error",
+                    Content = exception.Message,
+                    CloseButtonText = "Ok"
+                };
+
+                Task.Run(errorDialog.ShowAsync);
+            }
         }
+
+        #endregion
+
+        #region Methods
+
+        private void ReloadLastRefreshTime() => LastRefreshTime.Text = ($"(UTC):\n{Collection.FormattedLastRefreshDate}");
 
         #endregion
 
@@ -39,35 +62,54 @@ namespace CoinManager
 
         private void CurrenciesList_ItemClicked(object sender, ItemClickEventArgs e)
         {
-            if (e.ClickedItem is CurrenciesCollection.BriefCurrency item)
+            if (e.ClickedItem is BriefCurrency item)
                 Frame.Navigate(typeof(CurrencyInfoPage), item.Id);
         }
 
-        private void FastConversionButton_Click(object sender, RoutedEventArgs e)
-        {
-            Frame.Navigate(typeof(ConversionPage));
-        }
+        private void FastConversionButton_Click(object sender, RoutedEventArgs e) => Frame.Navigate(typeof(ConversionPage));
 
         private void RefreshButton_Click(object sender, RoutedEventArgs e)
         {
-            Collection.Update();
-            ReloadLastRefreshTime();
+            try
+            {
+                Collection.Update();
+                ReloadLastRefreshTime();
+            }
+            catch (Exception exception)
+            {
+                ContentDialog errorDialog = new ContentDialog()
+                {
+                    Title = "Error",
+                    Content = exception.Message,
+                    CloseButtonText = "Ok"
+                };
+
+                Task.Run(errorDialog.ShowAsync);
+            }
         }
 
         private void SearchButton_Click(object sender, RoutedEventArgs e)
         {
-            string mark = SearchBox.Text;
-            Collection.FindByMark(mark);
+            try
+            {
+                string mark = CurrencySearchBox.Text;
+                Collection.FilterByMark(mark);
 
-            ReloadLastRefreshTime();
+                ReloadLastRefreshTime();
+            }
+            catch (Exception exception)
+            {
+                ContentDialog errorDialog = new ContentDialog()
+                {
+                    Title = "Error",
+                    Content = exception.Message,
+                    CloseButtonText = "Ok"
+                };
+
+                Task.Run(errorDialog.ShowAsync);
+            }
         }
 
         #endregion
-
-        #region Methods
-
-        private void ReloadLastRefreshTime() => LastRefreshTime.Text = ($"Last refresh time (in UTC):\n{Collection.FormattedLastRefreshDate}");
-
-        #endregion        
     }
 }

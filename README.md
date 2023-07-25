@@ -1,7 +1,7 @@
 <br/>
 
 <div align="center">
-  <a href="https://github.com/miu-miu-enjoyers/excemath">
+  <a href="https://github.com/imlystyi/coin-manager">
     <img src="https://github.com/imlystyi/coin-manager/assets/47981548/dddf3820-cb1e-4870-979b-fd16295bee40" alt="Coin Manager Logo" width="150" height="150">
   </a>
   

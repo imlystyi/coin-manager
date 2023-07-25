@@ -1,5 +1,4 @@
-﻿using CoinManager.ViewModels;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Net;
 using System.Net.Http;

@@ -12,6 +12,8 @@ namespace CoinManager.Models
         [JsonProperty("priceUsd")]
         private readonly decimal? _price;
 
+        [JsonProperty("changePercent24Hr")]
+        private readonly decimal? _priceChangePercent;
         #endregion
 
         #region Properties
@@ -42,8 +44,7 @@ namespace CoinManager.Models
         /// <summary>
         /// The cryptocurrency price change within 24 hours.
         /// </summary>
-        [JsonProperty("changePercent24Hr")]
-        public decimal PriceChangePercent { get; set; }
+        public string PriceChangePercent => _price != null ? string.Format("{0:F4}%", _priceChangePercent) : "n/a";
 
         #endregion
     }

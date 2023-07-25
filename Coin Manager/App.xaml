@@ -2,17 +2,18 @@
     x:Class="CoinManager.App"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:CoinManager">
+    RequestedTheme="Dark">
     <Application.Resources>
-        <SolidColorBrush x:Key="EntryUnfocusedBackground" Color="#474B5B"/>
-        <SolidColorBrush x:Key="EntryFocusedBackground" Color="#9CA2B8"/>
-        <SolidColorBrush x:Key="EntryUnfocusedForeground" Color="#6A6E85"/>
-        <SolidColorBrush x:Key="EntryFocusedForeground" Color="#6A6E85"/>
-        <SolidColorBrush x:Key="DarkBackground" Color="#0F1020"/>
-        <Color x:Key="PurpleBorderBrush">#FF7353BA</Color>
-        <SolidColorBrush x:Key="ListHeaderBackground" Color="#FF1B0056"/>
-        <SolidColorBrush x:Key="ListItemBackground" Color="#0D0D0D"/>
+        <!--#region Colors -->
 
+        <Color x:Key="PurpleBorderBrush">#FF7353BA</Color>
+        <SolidColorBrush x:Key="DarkBackground" Color="#0F1020"/>
+        <SolidColorBrush x:Key="EntryBackground" Color="#474B5B"/>
+        <SolidColorBrush x:Key="ListHeaderBackground" Color="#FF1B0056"/>
+        <SolidColorBrush x:Key="ListItemBackground" Color="#0D0D0D"/>        
+        
+        <!--#endregion-->
+        
         <!--#region Button styles -->
 
         <Style x:Name="ImageButton" TargetType="Button">
@@ -54,70 +55,80 @@
         
         <!--#endregion-->
         
+        <!--#region Image styles -->
+
         <Style x:Name="CoinManagerLogo" TargetType="Image">
             <Setter Property="Source" Value="/Assets/Icons/coin_manager_logo.png"/>
             <Setter Property="HorizontalAlignment" Value="Right"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
         </Style>
+        
+        <!--#endregion-->
+        
+        <!--#region Text styles-->
 
-
-        <Style x:Name="CurrenciesListText" TargetType="TextBlock">
-            <Setter Property="TextWrapping" Value="Wrap"/>
+        <Style x:Name="ListText" TargetType="TextBlock">
             <Setter Property="FontSize" Value="24"/>
-            <Setter Property="Foreground" Value="White"/>
             <Setter Property="FontWeight" Value="Medium"/>
             <Setter Property="FontFamily" Value="Inter ExtraLight"/>
-            <Setter Property="Margin" Value="10,0,0,0"/>
-        </Style>        
-        <Style x:Name="CurrencyInfoText" TargetType="TextBlock">
-            <Setter Property="TextWrapping" Value="Wrap"/>
-            <Setter Property="FontSize" Value="32"/>
             <Setter Property="Foreground" Value="White"/>
-            <Setter Property="FontWeight" Value="Medium"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="Margin" Value="10,0,0,0"/>
+        </Style>
+
+        <Style x:Name="InfoText" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="32"/>
             <Setter Property="FontFamily" Value="Inter Light"/>
-            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Disabled"/>
+            <Setter Property="FontWeight" Value="Medium"/>
+            <Setter Property="Foreground" Value="White"/>
             <Setter Property="Width" Value="300"/>
-            <Setter Property="MaxWidth" Value="300"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
             <Setter Property="Margin" Value="10,0,0,0"/>
         </Style>
-        <Style x:Name="CurrenciesListSeparator" TargetType="TextBlock">
+        
+        <Style x:Name="ListSeparator" TargetType="TextBlock">
             <Setter Property="Text" Value="|"/>
-            <Setter Property="TextWrapping" Value="Wrap"/>
             <Setter Property="FontSize" Value="24"/>
-            <Setter Property="Foreground" Value="White"/>
-            <Setter Property="FontWeight" Value="Medium"/>
             <Setter Property="FontFamily" Value="Inter Thin"/>
+            <Setter Property="FontWeight" Value="Medium"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
         </Style>
-        <Style x:Name="CurrencyInfoSeparator" TargetType="TextBlock">
+        
+        <Style x:Name="InfoSeparator" TargetType="TextBlock">
             <Setter Property="Text" Value="|"/>
             <Setter Property="TextWrapping" Value="Wrap"/>
             <Setter Property="FontSize" Value="32"/>
-            <Setter Property="Foreground" Value="White"/>
-            <Setter Property="FontWeight" Value="Medium"/>
             <Setter Property="FontFamily" Value="Inter Light"/>
+            <Setter Property="FontWeight" Value="Medium"/>
+            <Setter Property="Foreground" Value="White"/>
         </Style>
-        <Style x:Name="CurrencyInfoValue" TargetType="TextBlock">
+        
+        <Style x:Name="InfoValue" TargetType="TextBlock">
             <Setter Property="TextWrapping" Value="Wrap"/>
             <Setter Property="FontSize" Value="32"/>
-            <Setter Property="Foreground" Value="White"/>
-            <Setter Property="FontWeight" Value="Medium"/>
             <Setter Property="FontFamily" Value="Inter Medium"/>
+            <Setter Property="FontWeight" Value="Medium"/>
+            <Setter Property="Foreground" Value="White"/>
             <Setter Property="Margin" Value="10,0,0,0"/>
         </Style>
+        
         <Style x:Name="Title" TargetType="TextBlock">
             <Setter Property="TextWrapping" Value="Wrap"/>
             <Setter Property="FontSize" Value="32"/>
-            <Setter Property="Foreground" Value="White"/>
-            <Setter Property="FontWeight" Value="Medium"/>
             <Setter Property="FontFamily" Value="Inter SemiBold"/>
+            <Setter Property="FontWeight" Value="Medium"/>
+            <Setter Property="Foreground" Value="White"/>
         </Style>
-        <Style x:Name="SearchString" TargetType="TextBox">
+        
+        <Style x:Name="Entry" TargetType="TextBox">
             <Setter Property="FontSize" Value="24"/>
-            <Setter Property="Background" Value="{StaticResource EntryUnfocusedBackground}"/>
+            <Setter Property="Background" Value="{StaticResource EntryBackground}"/>
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="CornerRadius" Value="10,10,10,10"/>
             <Setter Property="HorizontalAlignment" Value="Left"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
         </Style>
+    <!--#endregion-->
     </Application.Resources>
 </Application>

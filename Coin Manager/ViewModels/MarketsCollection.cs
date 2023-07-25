@@ -19,6 +19,9 @@ namespace CoinManager.ViewModels
 
         #region Constructors
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MarketsCollection"/> class.
+        /// </summary>
         public MarketsCollection(string id)
         {
             _id = id;

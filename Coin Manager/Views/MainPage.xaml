@@ -4,13 +4,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"    
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:converters="using:CoinManager.Converters"
     mc:Ignorable="d" 
     Background="{StaticResource DarkBackground}">
-
-    <Page.Resources>
-        <converters:StringFormatConverter x:Key="StringFormatConverter"/>
-    </Page.Resources>
 
     <Grid Margin="45,35,45,10">
         <Grid.RowDefinitions>
@@ -43,7 +38,7 @@
             <Button Style="{StaticResource ImageButton}" Grid.Column="1" Click="SearchButton_Click">
                 <Image Source="/Assets/Icons/enter_icon.png"/>
             </Button>
-            <TextBox x:Uid="CurrencySearchBox" x:Name="CurrencySearchBox" Style="{StaticResource SearchString}" Width="1350" Padding="50,0,0,5"/>
+            <TextBox x:Uid="CurrencySearchBox" x:Name="CurrencySearchBox" Style="{StaticResource Entry}" Width="1350" Padding="50,0,0,5"/>
         </Grid>
         <Image Source="/Assets/Icons/search_icon.png" Width="24" Height="24" HorizontalAlignment="Left" Margin="8,4,0,4" Grid.Row="1"/>
         <Grid Style="{StaticResource ListHeader}" Grid.Row="2">
@@ -56,13 +51,13 @@
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <TextBlock x:Uid="CurrencyRank" Style="{StaticResource CurrenciesListText}" FontFamily="Bold" Grid.Column="0"/>
-            <TextBlock Style="{StaticResource CurrenciesListSeparator}" Grid.Column="1"/>
-            <TextBlock x:Uid="CurrencyName" Style="{StaticResource CurrenciesListText}" FontFamily="Bold" Grid.Column="2"/>
-            <TextBlock Style="{StaticResource CurrenciesListSeparator}" Grid.Column="3"/>
-            <TextBlock x:Uid="CurrencyPrice" Style="{StaticResource CurrenciesListText}" FontFamily="Bold" Grid.Column="4"/>
-            <TextBlock Style="{StaticResource CurrenciesListSeparator}" Grid.Column="5"/>
-            <TextBlock x:Uid="CurrencyPriceChange" Style="{StaticResource CurrenciesListText}" FontFamily="Bold" Grid.Column="6"/>
+            <TextBlock x:Uid="CurrencyRank" Style="{StaticResource ListText}" FontFamily="Bold" Grid.Column="0"/>
+            <TextBlock Style="{StaticResource ListSeparator}" Grid.Column="1"/>
+            <TextBlock x:Uid="CurrencyName" Style="{StaticResource ListText}" FontFamily="Bold" Grid.Column="2"/>
+            <TextBlock Style="{StaticResource ListSeparator}" Grid.Column="3"/>
+            <TextBlock x:Uid="CurrencyPrice" Style="{StaticResource ListText}" FontFamily="Bold" Grid.Column="4"/>
+            <TextBlock Style="{StaticResource ListSeparator}" Grid.Column="5"/>
+            <TextBlock x:Uid="CurrencyPriceChange" Style="{StaticResource ListText}" FontFamily="Bold" Grid.Column="6"/>
         </Grid>
         <ListView ItemsSource="{x:Bind Collection.Container, Mode=OneWay}" IsItemClickEnabled="True" Grid.Row="4" ItemClick="CurrenciesList_ItemClicked">
             <ListView.ItemContainerStyle>
@@ -82,13 +77,13 @@
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <TextBlock Style="{StaticResource CurrenciesListText}" Text="{Binding Rank, Mode=OneWay}" Grid.Column="0"/>
-                        <TextBlock Style="{StaticResource CurrenciesListSeparator}" Grid.Column="1"/>
-                        <TextBlock Style="{StaticResource CurrenciesListText}" Text="{Binding Symbol, Mode=OneWay}" Grid.Column="2"/>
-                        <TextBlock Style="{StaticResource CurrenciesListSeparator}" Grid.Column="3"/>
-                        <TextBlock Style="{StaticResource CurrenciesListText}" Text="{Binding Price, Mode=OneWay}" Grid.Column="4"/>
-                        <TextBlock Style="{StaticResource CurrenciesListSeparator}" Grid.Column="5"/>
-                        <TextBlock Style="{StaticResource CurrenciesListText}" Text="{Binding PriceChangePercent, Mode=OneWay, Converter={StaticResource StringFormatConverter}, ConverterParameter='{}{0:F4}'}" Grid.Column="6"/>
+                        <TextBlock Style="{StaticResource ListText}" Text="{Binding Rank, Mode=OneWay}" Grid.Column="0"/>
+                        <TextBlock Style="{StaticResource ListSeparator}" Grid.Column="1"/>
+                        <TextBlock Style="{StaticResource ListText}" Text="{Binding Symbol, Mode=OneWay}" Grid.Column="2"/>
+                        <TextBlock Style="{StaticResource ListSeparator}" Grid.Column="3"/>
+                        <TextBlock Style="{StaticResource ListText}" Text="{Binding Price, Mode=OneWay}" Grid.Column="4"/>
+                        <TextBlock Style="{StaticResource ListSeparator}" Grid.Column="5"/>
+                        <TextBlock Style="{StaticResource ListText}" Text="{Binding PriceChangePercent, Mode=OneWay}" Grid.Column="6"/>
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>

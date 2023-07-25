@@ -17,7 +17,16 @@
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WindowsXamlEnableOverview>true</WindowsXamlEnableOverview>
-    <AppxPackageSigningEnabled>false</AppxPackageSigningEnabled>
+    <AppxPackageSigningEnabled>True</AppxPackageSigningEnabled>
+    <GenerateAppInstallerFile>False</GenerateAppInstallerFile>
+    <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
+    <GenerateTestArtifacts>True</GenerateTestArtifacts>
+    <AppxBundle>Always</AppxBundle>
+    <AppxBundlePlatforms>x86|x64</AppxBundlePlatforms>
+    <HoursBetweenUpdateChecks>0</HoursBetweenUpdateChecks>
+    <PackageCertificateThumbprint>ED07B23E8A45AC8F46BB1FA6AD24B2A7EE8D1C2D</PackageCertificateThumbprint>
+    <PackageCertificateKeyFile />
+    <AppxPackageSigningTimestampDigestAlgorithm>SHA256</AppxPackageSigningTimestampDigestAlgorithm>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DebugSymbols>true</DebugSymbols>
@@ -119,7 +128,6 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Converters\StringFormatConverter.cs" />
     <Compile Include="Models\Currency.cs" />
     <Compile Include="Models\BriefCurrency.cs" />
     <Compile Include="Models\Rate.cs" />
@@ -150,17 +158,60 @@
     <Content Include="Assets\Icons\arrow_icon.png" />
     <Content Include="Assets\Icons\coin_manager_logo.png" />
     <Content Include="Assets\Icons\enter_icon.png" />
+    <Content Include="Assets\Icons\LargeTile.scale-100.png" />
+    <Content Include="Assets\Icons\LargeTile.scale-125.png" />
+    <Content Include="Assets\Icons\LargeTile.scale-150.png" />
+    <Content Include="Assets\Icons\LargeTile.scale-200.png" />
+    <Content Include="Assets\Icons\LargeTile.scale-400.png" />
     <Content Include="Assets\Icons\refresh_icon.png" />
     <Content Include="Assets\Icons\search_icon.png" />
     <Content Include="Assets\Icons\settings_icon.png" />
+    <Content Include="Assets\Icons\SmallTile.scale-100.png" />
+    <Content Include="Assets\Icons\SmallTile.scale-125.png" />
+    <Content Include="Assets\Icons\SmallTile.scale-150.png" />
+    <Content Include="Assets\Icons\SmallTile.scale-200.png" />
+    <Content Include="Assets\Icons\SmallTile.scale-400.png" />
+    <Content Include="Assets\Icons\SplashScreen.scale-100.png" />
+    <Content Include="Assets\Icons\SplashScreen.scale-125.png" />
+    <Content Include="Assets\Icons\SplashScreen.scale-150.png" />
+    <Content Include="Assets\Icons\SplashScreen.scale-200.png" />
+    <Content Include="Assets\Icons\SplashScreen.scale-400.png" />
+    <Content Include="Assets\Icons\Square150x150Logo.scale-100.png" />
+    <Content Include="Assets\Icons\Square150x150Logo.scale-125.png" />
+    <Content Include="Assets\Icons\Square150x150Logo.scale-150.png" />
+    <Content Include="Assets\Icons\Square150x150Logo.scale-200.png" />
+    <Content Include="Assets\Icons\Square150x150Logo.scale-400.png" />
+    <Content Include="Assets\Icons\Square44x44Logo.altform-lightunplated_targetsize-16.png" />
+    <Content Include="Assets\Icons\Square44x44Logo.altform-lightunplated_targetsize-24.png" />
+    <Content Include="Assets\Icons\Square44x44Logo.altform-lightunplated_targetsize-256.png" />
+    <Content Include="Assets\Icons\Square44x44Logo.altform-lightunplated_targetsize-32.png" />
+    <Content Include="Assets\Icons\Square44x44Logo.altform-lightunplated_targetsize-48.png" />
+    <Content Include="Assets\Icons\Square44x44Logo.altform-unplated_targetsize-16.png" />
+    <Content Include="Assets\Icons\Square44x44Logo.altform-unplated_targetsize-24.png" />
+    <Content Include="Assets\Icons\Square44x44Logo.altform-unplated_targetsize-256.png" />
+    <Content Include="Assets\Icons\Square44x44Logo.altform-unplated_targetsize-32.png" />
+    <Content Include="Assets\Icons\Square44x44Logo.altform-unplated_targetsize-48.png" />
+    <Content Include="Assets\Icons\Square44x44Logo.scale-100.png" />
+    <Content Include="Assets\Icons\Square44x44Logo.scale-125.png" />
+    <Content Include="Assets\Icons\Square44x44Logo.scale-150.png" />
+    <Content Include="Assets\Icons\Square44x44Logo.scale-200.png" />
+    <Content Include="Assets\Icons\Square44x44Logo.scale-400.png" />
+    <Content Include="Assets\Icons\Square44x44Logo.targetsize-16.png" />
+    <Content Include="Assets\Icons\Square44x44Logo.targetsize-24.png" />
+    <Content Include="Assets\Icons\Square44x44Logo.targetsize-256.png" />
+    <Content Include="Assets\Icons\Square44x44Logo.targetsize-32.png" />
+    <Content Include="Assets\Icons\Square44x44Logo.targetsize-48.png" />
+    <Content Include="Assets\Icons\StoreLogo.scale-100.png" />
+    <Content Include="Assets\Icons\StoreLogo.scale-125.png" />
+    <Content Include="Assets\Icons\StoreLogo.scale-150.png" />
+    <Content Include="Assets\Icons\StoreLogo.scale-200.png" />
+    <Content Include="Assets\Icons\StoreLogo.scale-400.png" />
+    <Content Include="Assets\Icons\Wide310x150Logo.scale-100.png" />
+    <Content Include="Assets\Icons\Wide310x150Logo.scale-125.png" />
+    <Content Include="Assets\Icons\Wide310x150Logo.scale-150.png" />
+    <Content Include="Assets\Icons\Wide310x150Logo.scale-200.png" />
+    <Content Include="Assets\Icons\Wide310x150Logo.scale-400.png" />
     <Content Include="Properties\Default.rd.xml" />
-    <Content Include="Assets\LockScreenLogo.scale-200.png" />
-    <Content Include="Assets\SplashScreen.scale-200.png" />
-    <Content Include="Assets\Square150x150Logo.scale-200.png" />
-    <Content Include="Assets\Square44x44Logo.scale-200.png" />
-    <Content Include="Assets\Square44x44Logo.targetsize-24_altform-unplated.png" />
-    <Content Include="Assets\StoreLogo.png" />
-    <Content Include="Assets\Wide310x150Logo.scale-200.png" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -201,6 +252,7 @@
     <Content Include="Assets\Fonts\Inter-Bold.ttf" />
     <Content Include="Assets\Fonts\Inter-ExtraBold.ttf" />
     <Content Include="Assets\Fonts\Inter-Black.ttf" />
+    <None Include="Coin Manager_TemporaryKey.pfx" />
     <PRIResource Include="Strings\uk-ua\Resources.resw" />
     <PRIResource Include="Strings\en-us\Resources.resw" />
   </ItemGroup>

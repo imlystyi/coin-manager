@@ -22,7 +22,8 @@
  - Watching detailed information about cryptocurrency, including market cap, volume and supply
  - Watching in which market you can buy cryptocurrency and at what price and ability to go to the market page
  - Converting one (crypto)currency to another
+ - Dark/light theme support
+ - Localized into Ukrainian
 
 ## Technologies, platforms and APIs
 The [UWP](https://learn.microsoft.com/en-us/windows/uwp/get-started/universal-application-platform-guide) and [Json.NET](https://www.newtonsoft.com/json) library was used. Application built on the MVVM-pattern and powered by [CoinCap API 2.0](https://docs.coincap.io/).
-

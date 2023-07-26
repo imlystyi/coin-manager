@@ -168,6 +168,9 @@
   <data name="FastConversionButton.Content" xml:space="preserve">
     <value>Fast conversion</value>
   </data>
+  <data name="LastRefreshTime.Text" xml:space="preserve">
+    <value>Last refresh time:</value>
+  </data>
   <data name="QuoteCurrency.Text" xml:space="preserve">
     <value>Quote</value>
   </data>

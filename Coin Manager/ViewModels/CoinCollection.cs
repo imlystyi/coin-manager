@@ -16,7 +16,7 @@ using System.ComponentModel;
 namespace CoinManager.ViewModels
 {
     /// <summary>
-    /// Abstract collection from which collections related to cryptocurrencies are built.
+    /// Represents abstract collection from which collections related to cryptocurrencies are built.
     /// </summary>
     /// <typeparam name="T">An object that implements the <see cref="ICoin"/> interface.</typeparam>
     public abstract class CoinCollection<T> : INotifyPropertyChanged where T : ICoin
@@ -53,7 +53,7 @@ namespace CoinManager.ViewModels
         /// <summary>
         /// The last refresh date of the <see cref="Container"/>.
         /// </summary>
-        public string FormattedLastRefreshDate => TimestampToDateTime(timestamp).ToString("dd MM yyyy, HH:mm:ss");
+        public string FormattedLastRefreshDate => TimestampToDateTime(timestamp).ToString("dd.MM.yyyy, HH:mm:ss");
 
         #endregion
 

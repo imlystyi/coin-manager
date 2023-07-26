@@ -1,121 +1,131 @@
-﻿<!-- Copyright 2023 imlystyi
-	 Licensed under the Apache License, Version 2.0 (the "License"); 
-	 you may not use this file except in compliance with the License. 
-	 You may obtain a copy of the License at 
-	 http://www.apache.org/licenses/LICENSE-2.0
-	 Unless required by applicable law or agreed to in writing, 
-	 software distributed under the License is distributed on an "AS IS" 
-	 BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express 
-	 or implied. See the License for the specific language governing 
-	 permissions and limitations under the License. !-->
+﻿<!--
+	Copyright 2023 imlystyi
+	Licensed under the Apache License, Version 2.0 (the "License"); 
+	you may not use this file except in compliance with the License. 
+	You may obtain a copy of the License at 
+	http://www.apache.org/licenses/LICENSE-2.0
+	Unless required by applicable law or agreed to in writing, 
+	software distributed under the License is distributed on an "AS IS" 
+	BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express 
+	or implied. See the License for the specific language governing 
+	permissions and limitations under the License. 
+!-->
 <Page
-    x:Class="CoinManager.Views.CurrencyInfoPage"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d"
-    Background="{StaticResource DarkBackground}">
+	x:Class="CoinManager.Views.CurrencyInfoPage"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	mc:Ignorable="d"
+	Background="{StaticResource PageBackground}">
 
-    <Grid Margin="45,35,45,10">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <Grid Style="{StaticResource PageHeader}" Grid.Row="0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <Button Style="{StaticResource ImageButton}" Grid.Column="0" Click="RefreshButton_Click">
-                <Image Source="/Assets/Icons/refresh_icon.png"/>
-            </Button>
-            <Button x:Uid="BackButton" Style="{StaticResource TextButton}" Grid.Column="1" Click="BackButton_Click"/>
-            <Button x:Uid="FastConversionButton" Style="{StaticResource TextButton}" Grid.Column="2" Click="FastConversionButton_Click"/>
-            <TextBlock x:Name="LastRefreshTime" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,120,0" Grid.Column="3"/>
-            <Image Source="/Assets/Icons/coin_manager_logo.png" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="3"/>
-        </Grid>
-        <Grid x:Name="InfoGrid" Grid.Row="1" RowSpacing="7">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
-            </Grid.ColumnDefinitions>
-            <TextBlock x:Uid="CurrencyName" Style="{StaticResource InfoText}" Grid.Row="0" Grid.Column="0"/>
-            <TextBlock x:Uid="CurrencyRank" Style="{StaticResource InfoText}" Grid.Row="1" Grid.Column="0"/>
-            <TextBlock x:Uid="CurrencyCurrentPrice" Style="{StaticResource InfoText}" Grid.Row="2" Grid.Column="0"/>
-            <TextBlock x:Uid="CurrencyPriceChange24h" Style="{StaticResource InfoText}" Grid.Row="3" Grid.Column="0"/>
-            <TextBlock x:Uid="CurrencyVolume" Style="{StaticResource InfoText}" Grid.Row="0" Grid.Column="3"/>
-            <TextBlock x:Uid="CurrencySupply" Style="{StaticResource InfoText}" Grid.Row="1" Grid.Column="3"/>
-            <TextBlock x:Uid="CurrencyMaxSupply" Style="{StaticResource InfoText}" Grid.Row="2" Grid.Column="3"/>
-            <TextBlock x:Uid="CurrencyMarketCap" Style="{StaticResource InfoText}" Grid.Row="3" Grid.Column="3"/>
-            <TextBlock Style="{StaticResource InfoSeparator}" Grid.Row="0" Grid.Column="1"/>
-            <TextBlock Style="{StaticResource InfoSeparator}" Grid.Row="1" Grid.Column="1"/>
-            <TextBlock Style="{StaticResource InfoSeparator}" Grid.Row="2" Grid.Column="1"/>
-            <TextBlock Style="{StaticResource InfoSeparator}" Grid.Row="3" Grid.Column="1"/>
-            <TextBlock Style="{StaticResource InfoSeparator}" Grid.Row="0" Grid.Column="4"/>
-            <TextBlock Style="{StaticResource InfoSeparator}" Grid.Row="1" Grid.Column="4"/>
-            <TextBlock Style="{StaticResource InfoSeparator}" Grid.Row="2" Grid.Column="4"/>
-            <TextBlock Style="{StaticResource InfoSeparator}" Grid.Row="3" Grid.Column="4"/>
-            <TextBlock Style="{StaticResource InfoValue}" Text="{x:Bind DisplayedCurrency.Symbol}" Width="270" Grid.Row="0" Grid.Column="2"/>
-            <TextBlock Style="{StaticResource InfoValue}" Text="{x:Bind DisplayedCurrency.Rank}" Width="270" Grid.Row="1" Grid.Column="2"/>
-            <TextBlock Style="{StaticResource InfoValue}" Text="{x:Bind DisplayedCurrency.Price}" Width="270" Grid.Row="2" Grid.Column="2"/>
-            <TextBlock Style="{StaticResource InfoValue}" Text="{x:Bind DisplayedCurrency.PriceChange}" Width="270" Grid.Row="3" Grid.Column="2"/>
-            <TextBlock Style="{StaticResource InfoValue}" Text="{x:Bind DisplayedCurrency.Volume}" Grid.Row="0" Grid.Column="5"/>
-            <TextBlock Style="{StaticResource InfoValue}" Text="{x:Bind DisplayedCurrency.Supply}" Grid.Row="1" Grid.Column="5"/>
-            <TextBlock Style="{StaticResource InfoValue}" Text="{x:Bind DisplayedCurrency.MaxSupply}" Grid.Row="2" Grid.Column="5"/>
-            <TextBlock Style="{StaticResource InfoValue}" Text="{x:Bind DisplayedCurrency.MarketCap}" Grid.Row="3" Grid.Column="5"/>
-        </Grid>
-        <Grid Style="{StaticResource ListHeader}" Padding="0,8,0,0" Margin="0,20" Grid.Row="2">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="300"/>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="200"/>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="450"/>
-            </Grid.ColumnDefinitions>
-            <TextBlock x:Uid="CurrencyName" Style="{StaticResource ListText}" Grid.Column="0"/>
-            <TextBlock Style="{StaticResource ListSeparator}" Grid.Column="1"/>
-            <TextBlock x:Uid="QuoteCurrency" Style="{StaticResource ListText}" Grid.Column="2"/>
-            <TextBlock Style="{StaticResource ListSeparator}" Grid.Column="3"/>
-            <TextBlock x:Uid="CurrencyPrice" Style="{StaticResource ListText}" Grid.Column="4"/>
-        </Grid>
-        <ListView x:Name="MarketsList" ItemsSource="{x:Bind Collection.Container}" IsItemClickEnabled="True" Grid.Row="3" Margin="-18,0,0,0" ScrollViewer.HorizontalScrollBarVisibility="Visible" ItemClick="MarketsList_ItemClick">
-            <ListView.ItemContainerStyle>
-                <Style TargetType="ListViewItem">
-                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-                </Style>
-            </ListView.ItemContainerStyle>
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <Grid Margin="5" Background="#0D0D0D" Height="38" Padding="0,6,0,0">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="300"/>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="200"/>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="450"/>
-                        </Grid.ColumnDefinitions>
-                        <TextBlock Style="{StaticResource ListText}" Text="{Binding Id}" Grid.Column="0"/>
-                        <TextBlock Style="{StaticResource ListSeparator}" Grid.Column="1"/>
-                        <TextBlock Style="{StaticResource ListText}" Text="{Binding QuoteSymbol}" Grid.Column="2"/>
-                        <TextBlock Style="{StaticResource ListSeparator}" Grid.Column="3"/>
-                        <TextBlock Style="{StaticResource ListText}" Text="{Binding Price}" Grid.Column="4"/>
-                    </Grid>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-    </Grid>
+	<Grid Margin="45,35,45,10">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="*"/>
+		</Grid.RowDefinitions>
+		<Grid Style="{StaticResource PageHeader}" Grid.Row="0">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="Auto"/>
+				<ColumnDefinition Width="Auto"/>
+				<ColumnDefinition Width="Auto"/>
+				<ColumnDefinition Width="*"/>
+			</Grid.ColumnDefinitions>
+			<Button Style="{StaticResource ImageButton}" Grid.Column="0" Click="RefreshButton_Click">
+				<Image Source="/Assets/Icons/refresh_icon.png"/>
+			</Button>
+			<Button x:Uid="BackButton" Style="{StaticResource TextButton}" Grid.Column="1" Click="BackButton_Click"/>
+			<Button x:Uid="FastConversionButton" Style="{StaticResource TextButton}" Grid.Column="2" Click="FastConversionButton_Click"/>
+			<Grid Grid.Column="3" HorizontalAlignment="Left" VerticalAlignment="Center">
+				<Grid.RowDefinitions>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="Auto"/>
+				</Grid.RowDefinitions>
+				<TextBlock x:Uid="LastRefreshTime" Grid.Row="0"/>
+				<TextBlock x:Name="LastRefreshTimeValue" Grid.Row="1"/>
+			</Grid>
+			<Image Source="/Assets/Icons/coin_manager_logo.png" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="4"/>
+		</Grid>
+		<Grid x:Name="InfoGrid" Grid.Row="1" RowSpacing="7">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto"/>
+				<RowDefinition Height="Auto"/>
+				<RowDefinition Height="Auto"/>
+				<RowDefinition Height="Auto"/>
+			</Grid.RowDefinitions>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="Auto"/>
+				<ColumnDefinition Width="Auto"/>
+				<ColumnDefinition Width="Auto"/>
+				<ColumnDefinition Width="Auto"/>
+				<ColumnDefinition Width="Auto"/>
+				<ColumnDefinition Width="Auto"/>
+			</Grid.ColumnDefinitions>
+			<TextBlock x:Uid="CurrencyName" Style="{StaticResource InfoText}" Grid.Row="0" Grid.Column="0"/>
+			<TextBlock x:Uid="CurrencyRank" Style="{StaticResource InfoText}" Grid.Row="1" Grid.Column="0"/>
+			<TextBlock x:Uid="CurrencyCurrentPrice" Style="{StaticResource InfoText}" Grid.Row="2" Grid.Column="0"/>
+			<TextBlock x:Uid="CurrencyPriceChange24h" Style="{StaticResource InfoText}" Grid.Row="3" Grid.Column="0"/>
+			<TextBlock x:Uid="CurrencyVolume" Style="{StaticResource InfoText}" Grid.Row="0" Grid.Column="3"/>
+			<TextBlock x:Uid="CurrencySupply" Style="{StaticResource InfoText}" Grid.Row="1" Grid.Column="3"/>
+			<TextBlock x:Uid="CurrencyMaxSupply" Style="{StaticResource InfoText}" Grid.Row="2" Grid.Column="3"/>
+			<TextBlock x:Uid="CurrencyMarketCap" Style="{StaticResource InfoText}" Grid.Row="3" Grid.Column="3"/>
+			<TextBlock Style="{StaticResource InfoSeparator}" Grid.Row="0" Grid.Column="1"/>
+			<TextBlock Style="{StaticResource InfoSeparator}" Grid.Row="1" Grid.Column="1"/>
+			<TextBlock Style="{StaticResource InfoSeparator}" Grid.Row="2" Grid.Column="1"/>
+			<TextBlock Style="{StaticResource InfoSeparator}" Grid.Row="3" Grid.Column="1"/>
+			<TextBlock Style="{StaticResource InfoSeparator}" Grid.Row="0" Grid.Column="4"/>
+			<TextBlock Style="{StaticResource InfoSeparator}" Grid.Row="1" Grid.Column="4"/>
+			<TextBlock Style="{StaticResource InfoSeparator}" Grid.Row="2" Grid.Column="4"/>
+			<TextBlock Style="{StaticResource InfoSeparator}" Grid.Row="3" Grid.Column="4"/>
+			<TextBlock Style="{StaticResource InfoValue}" Text="{x:Bind DisplayedCurrency.Symbol}" Width="270" Grid.Row="0" Grid.Column="2"/>
+			<TextBlock Style="{StaticResource InfoValue}" Text="{x:Bind DisplayedCurrency.Rank}" Width="270" Grid.Row="1" Grid.Column="2"/>
+			<TextBlock Style="{StaticResource InfoValue}" Text="{x:Bind DisplayedCurrency.Price}" Width="270" Grid.Row="2" Grid.Column="2"/>
+			<TextBlock Style="{StaticResource InfoValue}" Text="{x:Bind DisplayedCurrency.PriceChange}" Width="270" Grid.Row="3" Grid.Column="2"/>
+			<TextBlock Style="{StaticResource InfoValue}" Text="{x:Bind DisplayedCurrency.Volume}" Grid.Row="0" Grid.Column="5"/>
+			<TextBlock Style="{StaticResource InfoValue}" Text="{x:Bind DisplayedCurrency.Supply}" Grid.Row="1" Grid.Column="5"/>
+			<TextBlock Style="{StaticResource InfoValue}" Text="{x:Bind DisplayedCurrency.MaxSupply}" Grid.Row="2" Grid.Column="5"/>
+			<TextBlock Style="{StaticResource InfoValue}" Text="{x:Bind DisplayedCurrency.MarketCap}" Grid.Row="3" Grid.Column="5"/>
+		</Grid>
+		<Grid Style="{StaticResource ListHeader}" Padding="0,8,0,0" Margin="0,20" Grid.Row="2">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="300"/>
+				<ColumnDefinition Width="Auto"/>
+				<ColumnDefinition Width="200"/>
+				<ColumnDefinition Width="Auto"/>
+				<ColumnDefinition Width="450"/>
+			</Grid.ColumnDefinitions>
+			<TextBlock x:Uid="CurrencyName" Style="{StaticResource ListText}" Grid.Column="0"/>
+			<TextBlock Style="{StaticResource ListSeparator}" Grid.Column="1"/>
+			<TextBlock x:Uid="QuoteCurrency" Style="{StaticResource ListText}" Grid.Column="2"/>
+			<TextBlock Style="{StaticResource ListSeparator}" Grid.Column="3"/>
+			<TextBlock x:Uid="CurrencyPrice" Style="{StaticResource ListText}" Grid.Column="4"/>
+		</Grid>
+		<ListView x:Name="MarketsList" ItemsSource="{x:Bind Collection.Container}" IsItemClickEnabled="True" Grid.Row="3" Margin="-18,0,0,0" ScrollViewer.HorizontalScrollBarVisibility="Visible" ItemClick="MarketsList_ItemClick">
+			<ListView.ItemContainerStyle>
+				<Style TargetType="ListViewItem">
+					<Setter Property="HorizontalContentAlignment" Value="Stretch" />
+				</Style>
+			</ListView.ItemContainerStyle>
+			<ListView.ItemTemplate>
+				<DataTemplate>
+					<Grid Margin="5" Background="{ThemeResource ListItemBackground}" Height="38" Padding="0,6,0,0">
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="300"/>
+							<ColumnDefinition Width="Auto"/>
+							<ColumnDefinition Width="200"/>
+							<ColumnDefinition Width="Auto"/>
+							<ColumnDefinition Width="450"/>
+						</Grid.ColumnDefinitions>
+						<TextBlock Style="{StaticResource ListText}" Text="{Binding Id}" Grid.Column="0"/>
+						<TextBlock Style="{StaticResource ListSeparator}" Grid.Column="1"/>
+						<TextBlock Style="{StaticResource ListText}" Text="{Binding QuoteSymbol}" Grid.Column="2"/>
+						<TextBlock Style="{StaticResource ListSeparator}" Grid.Column="3"/>
+						<TextBlock Style="{StaticResource ListText}" Text="{Binding Price}" Grid.Column="4"/>
+					</Grid>
+				</DataTemplate>
+			</ListView.ItemTemplate>
+		</ListView>
+	</Grid>
 </Page>

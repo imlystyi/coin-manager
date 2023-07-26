@@ -92,7 +92,7 @@ namespace CoinManager.Views
             base.OnNavigatedTo(e);
         }
 
-        private void ReloadLastRefreshTime() => LastRefreshTime.Text = ($"(UTC):\n{Collection.FormattedLastRefreshDate}");
+        private void ReloadLastRefreshTime() => LastRefreshTimeValue.Text = ($"{Collection.FormattedLastRefreshDate} (UTC)");
 
         #endregion
 

@@ -1,13 +1,15 @@
-﻿<!-- Copyright 2023 imlystyi
-	 Licensed under the Apache License, Version 2.0 (the "License"); 
-	 you may not use this file except in compliance with the License. 
-	 You may obtain a copy of the License at 
-	 http://www.apache.org/licenses/LICENSE-2.0
-	 Unless required by applicable law or agreed to in writing, 
-	 software distributed under the License is distributed on an "AS IS" 
-	 BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express 
-	 or implied. See the License for the specific language governing 
-	 permissions and limitations under the License. !-->
+﻿<!--
+	Copyright 2023 imlystyi
+	Licensed under the Apache License, Version 2.0 (the "License"); 
+	you may not use this file except in compliance with the License. 
+	You may obtain a copy of the License at 
+	http://www.apache.org/licenses/LICENSE-2.0
+	Unless required by applicable law or agreed to in writing, 
+	software distributed under the License is distributed on an "AS IS" 
+	BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express 
+	or implied. See the License for the specific language governing 
+	permissions and limitations under the License. 
+!-->
 <Page
 	x:Class="CoinManager.MainPage"
 	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
@@ -15,7 +17,7 @@
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	mc:Ignorable="d" 
-	Background="{StaticResource DarkBackground}">
+	Background="{ThemeResource PageBackground}">
 
 	<Grid Margin="45,35,45,10">
 		<Grid.RowDefinitions>
@@ -36,8 +38,15 @@
 				<Image Source="/Assets/Icons/refresh_icon.png"/>
 			</Button>
 			<Button x:Uid="FastConversionButton" Style="{StaticResource TextButton}" Grid.Column="1" Click="FastConversionButton_Click"/>
-			<TextBlock Text="v1.0" FontFamily="Inter Medium" FontSize="24" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,300,0" Grid.Column="4"/>
-			<TextBlock x:Name="LastRefreshTime" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,120,0" Grid.Column="3"/>
+			<Grid Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center">
+				<Grid.RowDefinitions>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="Auto"/>
+				</Grid.RowDefinitions>
+				<TextBlock x:Uid="LastRefreshTime" Grid.Row="0"/>
+				<TextBlock x:Name="LastRefreshTimeValue" Grid.Row="1"/>
+			</Grid>
+			<TextBlock Text="v1.1" FontFamily="Inter Medium" FontSize="24" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,120,0" Grid.Column="3"/>
 			<Image Style="{StaticResource CoinManagerLogo}" Grid.Column="4"/>
 		</Grid>
 		<Grid Grid.Row="1" ColumnSpacing="25">

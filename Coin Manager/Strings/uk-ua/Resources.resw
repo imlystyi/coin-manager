@@ -169,6 +169,9 @@
   <data name="FastConversionButton.Content" xml:space="preserve">
     <value>Швидка конвертація</value>
   </data>
+  <data name="LastRefreshTime.Text" xml:space="preserve">
+    <value>Востаннє оновлено:</value>
+  </data>
   <data name="QuoteCurrency.Text" xml:space="preserve">
     <value>Перевідна валюта</value>
   </data>

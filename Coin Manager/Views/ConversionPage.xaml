@@ -1,162 +1,164 @@
-﻿<!-- Copyright 2023 imlystyi
-	 Licensed under the Apache License, Version 2.0 (the "License"); 
-	 you may not use this file except in compliance with the License. 
-	 You may obtain a copy of the License at 
-	 http://www.apache.org/licenses/LICENSE-2.0
-	 Unless required by applicable law or agreed to in writing, 
-	 software distributed under the License is distributed on an "AS IS" 
-	 BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express 
-	 or implied. See the License for the specific language governing 
-	 permissions and limitations under the License. !-->
+﻿<!--
+	Copyright 2023 imlystyi
+	Licensed under the Apache License, Version 2.0 (the "License"); 
+	you may not use this file except in compliance with the License. 
+	You may obtain a copy of the License at 
+	http://www.apache.org/licenses/LICENSE-2.0
+	Unless required by applicable law or agreed to in writing, 
+	software distributed under the License is distributed on an "AS IS" 
+	BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express 
+	or implied. See the License for the specific language governing 
+	permissions and limitations under the License. 
+!-->
 <Page
-    x:Class="CoinManager.Views.ConversionPage"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d"
-    Background="{StaticResource DarkBackground}">
+	x:Class="CoinManager.Views.ConversionPage"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	mc:Ignorable="d"
+	Background="{StaticResource PageBackground}">
 
-    <Grid Margin="45,35,45,10">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
-        <Grid Style="{StaticResource PageHeader}" Grid.Row="0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <Button x:Uid="BackButton" Style="{StaticResource TextButton}" Grid.Column="0" Click="BackButton_Click"/>
-            <Image Style="{StaticResource CoinManagerLogo}" Grid.Column="1"/>
-        </Grid>
-        <Grid Grid.Row="1" RowSpacing="20" ColumnSpacing="200">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
-            </Grid.ColumnDefinitions>
-            <Grid Grid.Row="0" Grid.Column="0">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-                <TextBlock x:Uid="BasicCurrencyAmount" Style="{StaticResource Title}" Grid.Row="0"/>
-                <Grid Grid.Row="1" ColumnSpacing="25">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
-                    </Grid.ColumnDefinitions>
-                    <Button Style="{StaticResource ImageButton}" Grid.Column="1" Click="AmountEntryButton_Click">
-                        <Image Source="/Assets/Icons/enter_icon.png"/>
-                    </Button>
-                    <TextBox x:Uid="AmountEntryBox" x:Name="AmountEntryBox" Style="{StaticResource Entry}" Width="500" Padding="20,0,0,5" Grid.Row="1"/>
-                </Grid>
-            </Grid>
-            <Grid Grid.Row="1" Grid.Column="0">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-                <TextBlock x:Uid="BasicCurrencyName" Style="{StaticResource Title}" Grid.Row="0"/>
-                <Grid Grid.Row="1" ColumnSpacing="25">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
-                    </Grid.ColumnDefinitions>
-                    <Button Style="{StaticResource ImageButton}" Grid.Column="1" Click="BasicCurrencySearchButton_Click">
-                        <Image Source="/Assets/Icons/enter_icon.png"/>
-                    </Button>
-                    <TextBox x:Uid="CurrencySearchBox" x:Name="BasicCurrencySearchBox" Style="{StaticResource Entry}" Width="500" Padding="20,0,0,5" Grid.Row="1"/>
-                </Grid>
-                <Grid Style="{StaticResource ListHeader}" Width="500" HorizontalAlignment="Left" Padding="0,8,0,0" Margin="0,10,60,0" Grid.Row="3">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
-                    </Grid.ColumnDefinitions>
-                    <TextBlock x:Uid="CurrencyName" Style="{StaticResource ListText}" FontFamily="Bold"/>
-                </Grid>
-                <ListView ItemsSource="{x:Bind BasicCollection.Container, Mode=OneWay}" IsItemClickEnabled="True" Width="500" MaxHeight="200" HorizontalAlignment="Left" Grid.Row="4" ItemClick="BasicCurrenciesList_ItemClick">
-                    <ListView.ItemContainerStyle>
-                        <Style TargetType="ListViewItem">
-                            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-                        </Style>
-                    </ListView.ItemContainerStyle>
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <Grid Margin="-12,6" Background="#0D0D0D" Height="38" Padding="0,6,0,0">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="500"/>
-                                </Grid.ColumnDefinitions>
-                                <TextBlock Style="{StaticResource ListText}" Text="{Binding Symbol, Mode=OneWay}"/>
-                            </Grid>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
-            </Grid>
-            <Grid Grid.Row="1" Grid.Column="1">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-                <TextBlock x:Uid="QuoteCurrencyName" Style="{StaticResource Title}" Grid.Row="0"/>
-                <Grid Grid.Row="1" ColumnSpacing="75">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
-                    </Grid.ColumnDefinitions>
-                    <TextBox x:Uid="CurrencySearchBox" x:Name="QuoteCurrencySearchBox" Style="{StaticResource Entry}" Width="500" Padding="20,0,0,5" Grid.Column="0"/>
-                    <Button Style="{StaticResource ImageButton}" Margin="-50,0,0,0" Grid.Column="1" Click="QuoteCurrencySearchButton_Click">
-                        <Image Source="/Assets/Icons/enter_icon.png"/>
-                    </Button>
-                </Grid>
-                <Grid Style="{StaticResource ListHeader}" Width="500" HorizontalAlignment="Left" Padding="0,8,0,0" Margin="0,10,60,0" Grid.Row="3">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
-                    </Grid.ColumnDefinitions>
-                    <TextBlock x:Uid="CurrencyName" Style="{StaticResource ListText}" FontFamily="Bold"/>
-                </Grid>
-                <ListView ItemsSource="{x:Bind QuoteCollection.Container, Mode=OneWay}" IsItemClickEnabled="True" Width="500" MaxHeight="200" HorizontalAlignment="Left" Grid.Row="4" ItemClick="QuoteCurrenciesList_ItemClick">
-                    <ListView.ItemContainerStyle>
-                        <Style TargetType="ListViewItem">
-                            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-                        </Style>
-                    </ListView.ItemContainerStyle>
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <Grid Margin="-12,6" Background="#0D0D0D" Height="38" Padding="0,6,0,0">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"/>
-                                </Grid.ColumnDefinitions>
-                                <TextBlock Style="{StaticResource ListText}" Text="{Binding Symbol, Mode=OneWay}" Width="300"/>
-                            </Grid>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
-            </Grid>
-        </Grid>
-        <Grid Margin="0,60,0,0" Grid.Row="2" ColumnSpacing="15">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="600"/>
-                <ColumnDefinition Width="72"/>
-                <ColumnDefinition Width="600"/>
-            </Grid.ColumnDefinitions>
-            <Grid Background="{StaticResource ListItemBackground}" Grid.Column="0">
-                <TextBlock x:Name="BasicCurrencyAmount" Style="{StaticResource InfoValue}" FontSize="24" VerticalAlignment="Center"/>
-            </Grid>            
-            <Image Source="/Assets/Icons/arrow_icon.png" Height="72" Width="72" Grid.Column="1"/>
-            <Grid Background="{StaticResource ListItemBackground}" Grid.Column="2">
-                <TextBlock x:Name="QuoteCurrencyAmount" Style="{StaticResource InfoValue}" FontSize="24" VerticalAlignment="Center"/>
-            </Grid>            
-        </Grid>
-    </Grid>
+	<Grid Margin="45,35,45,10">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="Auto"/>
+		</Grid.RowDefinitions>
+		<Grid Style="{StaticResource PageHeader}" Grid.Row="0">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="Auto"/>
+				<ColumnDefinition Width="*"/>
+			</Grid.ColumnDefinitions>
+			<Button x:Uid="BackButton" Style="{StaticResource TextButton}" Grid.Column="0" Click="BackButton_Click"/>
+			<Image Style="{StaticResource CoinManagerLogo}" Grid.Column="1"/>
+		</Grid>
+		<Grid Grid.Row="1" RowSpacing="20" ColumnSpacing="200">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto"/>
+				<RowDefinition Height="Auto"/>
+			</Grid.RowDefinitions>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="Auto"/>
+				<ColumnDefinition Width="Auto"/>
+			</Grid.ColumnDefinitions>
+			<Grid Grid.Row="0" Grid.Column="0">
+				<Grid.RowDefinitions>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="Auto"/>
+				</Grid.RowDefinitions>
+				<TextBlock x:Uid="BasicCurrencyAmount" Style="{StaticResource Title}" Grid.Row="0"/>
+				<Grid Grid.Row="1" ColumnSpacing="25">
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="Auto"/>
+						<ColumnDefinition Width="Auto"/>
+					</Grid.ColumnDefinitions>
+					<Button Style="{StaticResource ImageButton}" Grid.Column="1" Click="AmountEntryButton_Click">
+						<Image Source="/Assets/Icons/enter_icon.png"/>
+					</Button>
+					<TextBox x:Uid="AmountEntryBox" x:Name="AmountEntryBox" Style="{StaticResource Entry}" Width="500" Padding="20,0,0,5" Grid.Row="1"/>
+				</Grid>
+			</Grid>
+			<Grid Grid.Row="1" Grid.Column="0">
+				<Grid.RowDefinitions>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="Auto"/>
+				</Grid.RowDefinitions>
+				<TextBlock x:Uid="BasicCurrencyName" Style="{StaticResource Title}" Grid.Row="0"/>
+				<Grid Grid.Row="1" ColumnSpacing="25">
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="Auto"/>
+						<ColumnDefinition Width="Auto"/>
+					</Grid.ColumnDefinitions>
+					<Button Style="{StaticResource ImageButton}" Grid.Column="1" Click="BasicCurrencySearchButton_Click">
+						<Image Source="/Assets/Icons/enter_icon.png"/>
+					</Button>
+					<TextBox x:Uid="CurrencySearchBox" x:Name="BasicCurrencySearchBox" Style="{StaticResource Entry}" Width="500" Padding="20,0,0,5" Grid.Row="1"/>
+				</Grid>
+				<Grid Style="{StaticResource ListHeader}" Width="500" HorizontalAlignment="Left" Padding="0,8,0,0" Margin="0,10,60,0" Grid.Row="3">
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="Auto"/>
+					</Grid.ColumnDefinitions>
+					<TextBlock x:Uid="CurrencyName" Style="{StaticResource ListText}" FontFamily="Bold"/>
+				</Grid>
+				<ListView ItemsSource="{x:Bind BasicCollection.Container, Mode=OneWay}" IsItemClickEnabled="True" Width="500" MaxHeight="200" HorizontalAlignment="Left" Grid.Row="4" ItemClick="BasicCurrenciesList_ItemClick">
+					<ListView.ItemContainerStyle>
+						<Style TargetType="ListViewItem">
+							<Setter Property="HorizontalContentAlignment" Value="Stretch" />
+						</Style>
+					</ListView.ItemContainerStyle>
+					<ListView.ItemTemplate>
+						<DataTemplate>
+							<Grid Margin="-12,6" Background="{ThemeResource ListItemBackground}" Height="38" Padding="0,6,0,0">
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="500"/>
+								</Grid.ColumnDefinitions>
+								<TextBlock Style="{StaticResource ListText}" Text="{Binding Symbol, Mode=OneWay}"/>
+							</Grid>
+						</DataTemplate>
+					</ListView.ItemTemplate>
+				</ListView>
+			</Grid>
+			<Grid Grid.Row="1" Grid.Column="1">
+				<Grid.RowDefinitions>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="Auto"/>
+				</Grid.RowDefinitions>
+				<TextBlock x:Uid="QuoteCurrencyName" Style="{StaticResource Title}" Grid.Row="0"/>
+				<Grid Grid.Row="1" ColumnSpacing="75">
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="Auto"/>
+						<ColumnDefinition Width="Auto"/>
+					</Grid.ColumnDefinitions>
+					<TextBox x:Uid="CurrencySearchBox" x:Name="QuoteCurrencySearchBox" Style="{StaticResource Entry}" Width="500" Padding="20,0,0,5" Grid.Column="0"/>
+					<Button Style="{StaticResource ImageButton}" Margin="-50,0,0,0" Grid.Column="1" Click="QuoteCurrencySearchButton_Click">
+						<Image Source="/Assets/Icons/enter_icon.png"/>
+					</Button>
+				</Grid>
+				<Grid Style="{StaticResource ListHeader}" Width="500" HorizontalAlignment="Left" Padding="0,8,0,0" Margin="0,10,60,0" Grid.Row="3">
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="Auto"/>
+					</Grid.ColumnDefinitions>
+					<TextBlock x:Uid="CurrencyName" Style="{StaticResource ListText}" FontFamily="Bold"/>
+				</Grid>
+				<ListView ItemsSource="{x:Bind QuoteCollection.Container, Mode=OneWay}" IsItemClickEnabled="True" Width="500" MaxHeight="200" HorizontalAlignment="Left" Grid.Row="4" ItemClick="QuoteCurrenciesList_ItemClick">
+					<ListView.ItemContainerStyle>
+						<Style TargetType="ListViewItem">
+							<Setter Property="HorizontalContentAlignment" Value="Stretch" />
+						</Style>
+					</ListView.ItemContainerStyle>
+					<ListView.ItemTemplate>
+						<DataTemplate>
+							<Grid Margin="-12,6" Background="{ThemeResource ListItemBackground}" Height="38" Padding="0,6,0,0">
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="Auto"/>
+								</Grid.ColumnDefinitions>
+								<TextBlock Style="{StaticResource ListText}" Text="{Binding Symbol, Mode=OneWay}" Width="300"/>
+							</Grid>
+						</DataTemplate>
+					</ListView.ItemTemplate>
+				</ListView>
+			</Grid>
+		</Grid>
+		<Grid Margin="0,60,0,0" Width="1275" Grid.Row="2" ColumnSpacing="15" HorizontalAlignment="Left">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="*"/>
+				<ColumnDefinition Width="72"/>
+				<ColumnDefinition Width="*"/>
+			</Grid.ColumnDefinitions>
+			<Grid Background="{ThemeResource ListItemBackground}" Grid.Column="0">
+				<TextBlock x:Name="BasicCurrencyAmount" Style="{StaticResource InfoValue}" FontSize="24" VerticalAlignment="Center"/>
+			</Grid>            
+			<Image Source="/Assets/Icons/arrow_icon.png" Height="72" Width="72" Grid.Column="1"/>
+			<Grid Background="{ThemeResource ListItemBackground}" Grid.Column="2">
+				<TextBlock x:Name="QuoteCurrencyAmount" Style="{StaticResource InfoValue}" FontSize="24" VerticalAlignment="Center"/>
+			</Grid>            
+		</Grid>
+	</Grid>
 </Page>

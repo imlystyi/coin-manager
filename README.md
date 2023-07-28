@@ -14,7 +14,7 @@
 </div>
  
  ## What is it?
- **Coin Manager** is an application that allows you to watch, manage and transfer cryptocurrencies.
+ **Coin Manager** is an application that allows you to watch, manage and convert cryptocurrencies.
  
  ## Functionality
  - Watching the top 10 (by rank) cryptocurrencies on the market
